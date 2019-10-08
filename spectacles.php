@@ -17,8 +17,16 @@
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 					
 				foreach($data as $value) {
-					$exp = '/[,^","]/';
-					$fields = preg_split($exp, $value);
+					//$exp = '/"(\\\\[\\\\"]|[,])*"|[,]/'; // '/[,^()]/'
+					$value = preg_replace_callback(
+						'/"(\\\\[\\\\"]|[,])*"/',
+						function ($match){
+							preg_replace(",", "&#44", $match);
+						}
+						,$value
+					);
+					echo $value;
+					$fields = preg_split(",", $value);
 					if($jour != $fields[0]){
 						$jour = $fields[0];
 						echo "<h2> " . $jour . "</h2>";
