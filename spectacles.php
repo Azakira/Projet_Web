@@ -14,34 +14,36 @@
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
+				echo '<div class="decalage">\n';
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 					
-				foreach($data as $value) {
-					$replaced = preg_replace_callback(
-						'/"(\\\\[\\\\"]|[^\\\\"])*"/',
-						function ($match){
-							$temp = preg_replace("[,]", '&#44;', $match);
-							implode($temp);
-							return $temp[0];
-						},
-						$value
-					);
+					foreach($data as $value) {
+						$replaced = preg_replace_callback(
+							'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+							function ($match){
+								$temp = preg_replace("[,]", '&#44;', $match);
+								implode($temp);
+								return $temp[0];
+							},
+							$value
+						);
+						
+						$fields = preg_split("[,]", $replaced);
+						if($jour != $fields[0]){
+							
+							$jour = $fields[0];
+							echo "<h2> " . $jour . "</h2>\n";
+						}
+						echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
+						
 					
-					$fields = preg_split("[,]", $replaced);
-					if($jour != $fields[0]){
-						$jour = $fields[0];
-						echo "<h2> " . $jour . "</h2>";
 					}
-					echo "<div class= \"Lieu\">\n";
-					echo $fields[2] . ", par " . $fields[5] . " à " . $fields[4] . "\n</div>\n";
-					
-				
-			}
 			
-		}
+				}
 		
-		fclose($handle);
-	}
+				fclose($handle);
+				echo '</div><!--class="decalage"-->\n';
+			}
 		?>
 	</body>
 
