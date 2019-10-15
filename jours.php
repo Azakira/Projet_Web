@@ -9,6 +9,17 @@
 		<div class="bandeau">						
 			<h1> Festival Théâtres de Bourbon : jour après jour </h1>
 		</div ><!--class="bandeau"-->
+		<div class="menu">
+			<ul class="navbar">
+				Le site :
+				<li>Qui sommes nous?</li>
+				<li><a href="jours.php">Jour par jour</a></li>
+				<li>Lieu par Lieu</li>	
+				<li>Spectacles</li>
+				<li>Tarifs</li>
+			</ul>			
+		</div>
+		
 		
 		<?php 
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
