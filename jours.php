@@ -11,7 +11,7 @@
 		</div ><!--class="bandeau"-->
 		<div class="menu">
 			<ul class="navbar">
-				Le site :
+				<a href="projet.html">Le site :</a>
 				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par jour</a></li>
 				<li>Lieu par Lieu</li>	
