@@ -14,7 +14,7 @@
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
-				echo '<div class="decalage">\n';
+				echo '<div class="decalage"'."\n<br/>\n";
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 					
 					foreach($data as $value) {
@@ -33,9 +33,11 @@
 							
 							$jour = $fields[0];
 							echo "<h2> " . $jour . "</h2>\n";
+							echo "<table>\n";
 						}
+						echo "<tr>\n<td>";
 						echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
-						
+						echo "</td>\n <td>Reserver</td></tr>\n";
 					
 					}
 			
