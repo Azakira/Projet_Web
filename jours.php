@@ -1,20 +1,20 @@
 <html>
 	<head>
-		<title>Theatres de Bourbon</title>
+		<title>Festival Théâtres de Bourbon : jour après jour</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
 	</head>
 	
 	<body>
 		<div class="bandeau">						
-			<h1> Festival Théâtres de Bourbon </h1>
+			<h1> Festival Théâtres de Bourbon : jour après jour </h1>
 		</div ><!--class="bandeau"-->
 		
 		<?php 
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$jour = "null";
-				echo '<div class="decalage"'."\n<br/>\n";
+				echo '<main>\n<div class="decalage"'."\n<br/>\n";
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 					
 					foreach($data as $value) {
@@ -44,7 +44,7 @@
 				}
 		
 				fclose($handle);
-				echo '</div><!--class="decalage"-->\n';
+				echo '</div><!--class="decalage"-->\n<main>\n';
 			}
 		?>
 	</body>
