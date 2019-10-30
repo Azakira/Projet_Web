@@ -46,12 +46,12 @@
 				}
 				$sort_lieu = array();	//Pour y mettre le tableau trié en fonction des jours
 				$last_lieu = "null";
-				do { 
+				while(count($tab)>0) { //tant que $tab est nn vide	 
 					foreach($tab as $line){
 						//parcourir le tableau pour chercher le nouveau $last_lieu
 						if($last_lieu != $line[3]){
 							$last_lieu = $line[3];
-							break 1;
+							break 1;//On sort du foreach
 						}
 					}
 					foreach($tab as $i => $line){
@@ -60,7 +60,7 @@
 							unset($tab[$i]);
 						}
 					}
-				} while(count($tab)>0); //tant que $tab et $sort_lieu ont un nbre d'elts !=	
+				} 
 				if($lieu != $fields[3]){
 					if($lieu != "null"){
 						echo "</table>\n";
