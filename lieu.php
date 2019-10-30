@@ -25,7 +25,6 @@
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$lieu = "null";
-				$last_lieu = "null";
 				$tab = array();
 				echo "<main>\n<div class=\"decalage\">\n<br/>\n";
 				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
@@ -46,17 +45,22 @@
 					}
 				}
 				$sort_lieu = array();	//Pour y mettre le tableau trié en fonction des jours
-				
-				while(count($tab)!= count($sort_lieu)){ //tant que $tab et $sort_lieu ont un nbre d'elts !=
-					foreach($tab as $line){
-						if($line[3] == $last_lieu){
-							array.push($sort_lieu, $line)
-						}
-					}
+				$last_lieu = "null";
+				do { 
 					foreach($tab as $line){
 						//parcourir le tableau pour chercher le nouveau $last_lieu
+						if($last_lieu != $line[3]){
+							$last_lieu = $line[3];
+							break 1;
+						}
 					}
-				}				
+					foreach($tab as $i => $line){
+						if($tab[$i][3] == $last_lieu){
+							array_push($sort_lieu, $tab[$i]);
+							unset($tab[$i]);
+						}
+					}
+				} while(count($tab)>0); //tant que $tab et $sort_lieu ont un nbre d'elts !=	
 				if($lieu != $fields[3]){
 					if($lieu != "null"){
 						echo "</table>\n";
@@ -65,6 +69,20 @@
 					echo "<h2> " . $lieu . "</h2>\n";
 					echo "<table>\n";
 				}
+				
+				echo "sort_lieu:<br/>";
+				foreach($sort_lieu as $line) {
+					foreach($line as $value){
+						echo $value . " ";
+					}
+					echo "<br/>\n";
+				}
+				
+				echo count($tab);
+				echo " ";
+				echo count($sort_lieu);
+				
+				
 				echo "<tr>\n<td>";
 				echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
 				echo "</td>\n <td>Reserver</td></tr>\n";
