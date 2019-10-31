@@ -14,7 +14,7 @@
 				<a href="projet.html">Le site :</a>
 				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par jour</a></li>
-				<li>Lieu par Lieu</li>	
+				<li><a href="lieu.php">Lieu par Lieu</a></li>	
 				<li>Spectacles</li>
 				<li>Tarifs</li>
 			</ul>			
@@ -60,32 +60,23 @@
 							unset($tab[$i]);
 						}
 					}
-				} 
-				if($lieu != $fields[3]){
-					if($lieu != "null"){
-						echo "</table>\n";
-					}
-					$lieu = $fields[3];
-					echo "<h2> " . $lieu . "</h2>\n";
-					echo "<table>\n";
 				}
-				
-				echo "sort_lieu:<br/>";
-				foreach($sort_lieu as $line) {
-					foreach($line as $value){
-						echo $value . " ";
+				//Boucle pour l'affichage html
+				foreach($sort_lieu as $line){
+					
+					if($lieu != $line[3]){
+						if($lieu != "null"){
+							echo "</table>\n";
+						}
+						$lieu = $line[3];
+						echo "<h2> " . $lieu . ", " . $line[4] . "</h2>\n";
+						echo "<table>\n";
 					}
-					echo "<br/>\n";
+					
+					echo "<tr>\n<td>";
+					echo "<Horaire> Le " . $line[0] . " " . " à " . $line[1] . "</Horaire>, " . "<titreSpectacle>". $line[2] . "</titreSpectacle> par <troupe>" . $line[5] . "</troupe><br/>\n";
+					echo "</td>\n <td>Reserver</td></tr>\n";
 				}
-				
-				echo count($tab);
-				echo " ";
-				echo count($sort_lieu);
-				
-				
-				echo "<tr>\n<td>";
-				echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
-				echo "</td>\n <td>Reserver</td></tr>\n";
 					
 			
 				
