@@ -14,7 +14,7 @@
 				<a href="projet.html">Le site :</a>
 				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par jour</a></li>
-				<li>Lieu par Lieu</li>	
+				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li>Spectacles</li>
 				<li>Tarifs</li>
 			</ul>			
