@@ -13,9 +13,9 @@
 			<ul class="navbar">
 				<a href="projet.html">Le site :</a>
 				<li>Qui sommes nous?</li>
-				<li><a href="jours.php">Jour par jour</a></li>
+				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
-				<li>Spectacles</li>
+				<li><a href="spectacle.php">Spectacles</a></li>
 				<li>Tarifs</li>
 			</ul>			
 		</div>
