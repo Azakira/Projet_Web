@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+?>
+
 <!DOCTYPE html>	
 <html>
 	<head>
@@ -17,7 +21,7 @@
 		</div ><!--class="bandeau"-->
 		<div class="menu">
 			<ul class="navbar">
-				<a href="projet.html">Le site :</a>
+				<a href="index.php">Le site :</a>
 				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
