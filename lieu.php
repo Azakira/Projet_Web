@@ -1,3 +1,9 @@
+<?php 
+	session_start();
+	if(!isset($_SESSION['panier']) || empty($_SESSION['panier'])){
+		$_SESSION['panier'] = array();
+	}
+?>
 <html>
 	<head>
 		<title>Festival Théâtres de Bourbon : Lieu par lieu</title>
@@ -22,6 +28,7 @@
 		
 		
 		<?php 
+			
 			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 				$lieu = "null";
@@ -73,10 +80,18 @@
 						echo "<table>\n";
 					}
 					
-					echo "<tr>\n<td>";
-					echo "<Horaire> Le " . $line[0] . " " . " à " . $line[1] . "</Horaire>, " . "<titreSpectacle>". $line[2] . "</titreSpectacle> par <troupe>" . $line[5] . "</troupe><br/>\n";
-					echo "</td>\n <td>Reserver</td></tr>\n";
+					echo "<tr>\n<td>\n";
+					echo "<Horaire> Le " . $line[0] . " " . " à " . $line[1] . "</Horaire>, " . "<titreSpectacle>". $line[2] . "</titreSpectacle> par <troupe>" . $line[5] . "</troupe><br/>\n</td>\n";
+					echo "<td> \n";
+					echo "<form action='reservation.php' method='post'>\n";
+					echo "<input type=\"submit\" value=\"Reserver\">\n";
+					echo "<input name='titre' type=hidden value=\"" . $line[2] . "\">\n";
+					echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
+					echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
+					echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
+					echo "\n</form> \n</td> \n</tr>\n";
 				}
+					
 					
 			
 				
