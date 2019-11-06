@@ -20,47 +20,50 @@
 			</ul>			
 		</div>
 		
-		
-		<?php 
-			if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
-				fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
-				$jour = "null";
-				echo "<main>\n<div class=\"decalage\">\n<br/>\n";
-				while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
-					
-					foreach($data as $value) {
-						$replaced = preg_replace_callback(
-							'/"(\\\\[\\\\"]|[^\\\\"])*"/',
-							function ($match){
-								$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
-								$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
-								implode($match); //concatene le tout
-								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
-							},
-							$value
-						);
+		<main>
+			<div class="decalage">
+				<br/>
+				<?php 
+					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+						fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
+						$jour = "null";
 						
-						$fields = preg_split("[,]", $replaced);
-						if($jour != $fields[0]){
-							if($jour != "null"){
-								echo "</table>\n";
+						while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+							
+							foreach($data as $value) {
+								$replaced = preg_replace_callback(
+									'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+									function ($match){
+										$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+										$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
+										implode($match); //concatene le tout
+										return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+									},
+									$value
+								);
+								
+								$fields = preg_split("[,]", $replaced);
+								if($jour != $fields[0]){
+									if($jour != "null"){
+										echo "</table>\n";
+									}
+									$jour = $fields[0];
+									echo "<h2> " . $jour . "</h2>\n";
+									echo "<table>\n";
+								}
+								echo "<tr>\n<td>";
+								echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
+								echo "</td>\n <td>Reserver</td></tr>\n";
+							
 							}
-							$jour = $fields[0];
-							echo "<h2> " . $jour . "</h2>\n";
-							echo "<table>\n";
-						}
-						echo "<tr>\n<td>";
-						echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
-						echo "</td>\n <td>Reserver</td></tr>\n";
 					
+						}
+						fclose($handle);
+						
 					}
-			
-				}
-				echo "<table>\n</div><!--class=\"decalage\"-->\n<main>\n";
-				fclose($handle);
-				
-			}
-		?>
+				?>
+			</div><!--class=\"decalage\"-->
+		</main>
 	</body>
 
 </html>
