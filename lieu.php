@@ -40,9 +40,10 @@
 						$replaced = preg_replace_callback(
 							'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 							function ($match){
-								$temp = preg_replace("[,]", '&#44;', $match);
-								implode($temp);
-								return $temp[0];
+								$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+								$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
+								implode($match); //concatene le tout
+								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 							},
 							$value
 						);
@@ -89,6 +90,7 @@
 					echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
 					echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
 					echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
+					echo "<input name='troupe' type=hidden value=\"" . $line[5] . "\">\n";
 					echo "\n</form> \n</td> \n</tr>\n";
 				}
 					
