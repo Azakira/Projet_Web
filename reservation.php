@@ -25,19 +25,23 @@
 				<li>Tarifs</li>
 			</ul>			
 		</div>
+
+		<main>
+			<div class="decalage">
+				<br/>
 		
-		<?php
-			$spectacle = array(
-				"titre" => $_POST['titre'],
-				"date"  => $_POST['date'],
-				"heure" => $_POST['heure'],
-				"lieu"  => $_POST['lieu'],
-				"troupe"=> $_POST['troupe']
-			);
-			foreach($spectacle as $i => $v){
-				echo $i . " => " .$v . ", \n";
-			}
-		?>
+				<?php
+					$spectacle = array(
+						"titre" => $_POST['titre'],
+						"date"  => $_POST['date'],
+						"heure" => $_POST['heure'],
+						"lieu"  => $_POST['lieu'],
+						"troupe"=> $_POST['troupe']
+					);
+					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe><br/>\n</td>\n";
+				?>
+			</div><!--class=\"decalage\"-->
+		</main>
 		
 	</body>
 
