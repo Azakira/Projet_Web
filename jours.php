@@ -53,7 +53,15 @@
 								}
 								echo "<tr>\n<td>";
 								echo "<Horaire>" . $fields[1] . "</Horaire>, au <Lieu>" . $fields[3] . " à " . $fields[4] . "</Lieu>, <titreSpectacle>". $fields[2] . "</titreSpectacle> par <troupe>" . $fields[5] . "</troupe><br/>\n";
-								echo "</td>\n <td>Reserver</td></tr>\n";
+								echo "</td>\n <td>";
+								echo "<form action='reservation.php' method='post'>\n";
+								echo "<input type=\"submit\" value=\"Reserver\">\n";
+								echo "<input name='titre' type=hidden value=\"" . $line[2] . "\">\n";
+								echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
+								echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
+								echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
+								echo "<input name='troupe' type=hidden value=\"" . $line[5] . "\">\n";
+								echo "</form>\n</td>\n</tr>\n";
 							
 							}
 					
