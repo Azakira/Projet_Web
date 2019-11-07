@@ -36,9 +36,10 @@
 						"date"  => $_POST['date'],
 						"heure" => $_POST['heure'],
 						"lieu"  => $_POST['lieu'],
-						"troupe"=> $_POST['troupe']
+						"troupe"=> $_POST['troupe'],
+						"ville" => $_POST['ville']
 					);
-					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe><br/>\n</td>\n";
+					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe> à <lieu>" . $spectacle['lieu'] . ", " . $spectacle['ville'] . ".</lieu><br/>\n</td>\n";
 					echo "<form action='jsp.php'>\n";
 					echo "Places adulte: <input type='number' name='quantity' min='0'></br>\n";
 					echo "Places enfant: <input type='number' name='quantity' min='0'></br>\n";

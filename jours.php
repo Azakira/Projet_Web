@@ -56,11 +56,12 @@
 								echo "</td>\n <td>";
 								echo "<form action='reservation.php' method='post'>\n";
 								echo "<input type=\"submit\" value=\"Reserver\">\n";
-								echo "<input name='titre' type=hidden value=\"" . $line[2] . "\">\n";
-								echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
-								echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
-								echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
-								echo "<input name='troupe' type=hidden value=\"" . $line[5] . "\">\n";
+								echo "<input name='titre' type=hidden value=\"" . $fields[2] . "\">\n";
+								echo "<input name='date' type=hidden value=\"" . $fields[0] . "\">\n";
+								echo "<input name='heure' type=hidden value=\"" . $fields[1] . "\">\n";
+								echo "<input name='lieu' type=hidden value=\"" . $fields[3] . "\">\n";
+								echo "<input name='ville' type=hidden value=\"" . $fields[4] . "\">\n";
+								echo "<input name='troupe' type=hidden value=\"" . $fields[5] . "\">\n";
 								echo "</form>\n</td>\n</tr>\n";
 							
 							}
