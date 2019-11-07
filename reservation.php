@@ -39,6 +39,12 @@
 						"troupe"=> $_POST['troupe']
 					);
 					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe><br/>\n</td>\n";
+					echo "<form action='jsp.php'>\n";
+					echo "Places adulte: <input type='number' name='quantity' min='0'></br>\n";
+					echo "Places enfant: <input type='number' name='quantity' min='0'></br>\n";
+					echo "Places tarif réduit: <input type='number' name='quantity' min='0'></br>\n";
+					echo "<input type='submit'>\n";
+					echo "</form>\n";
 				?>
 			</div><!--class=\"decalage\"-->
 		</main>
