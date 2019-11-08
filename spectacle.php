@@ -160,24 +160,21 @@
 					$last_spec = "null";
 					$spec_aplh = " ";
 					while(count($tab)>0){ 
-						foreach($tab as $line){
-							//parcourir le tableau pour chercher le nouveau $last_spec
-
+						foreach($tab as $line){//parcourir le tableau pour chercher le nouveau $last_spec
 							if($last_spec!= $line[2]){
 								$last_spec = $line[2];
 								break 1;
 							}
 						}
-						$tab_asso = array();
+						$tab_asso = array(); //tableau pour mettre les spectacles en fonction du last_spec et est réinitialiser pour le prochain last_spec
 						foreach($tab as $i => $line){
-							if($tab[$i][2] == $last_spec){	
+							if($tab[$i][2] == $last_spec){	 //si le titreDeSpectacle est égale au last_spec alors on met sa ligne le concernant dans tab_asso et on retire la ligne de tab
 								array_push($tab_asso, $tab[$i]);
 								unset($tab[$i]);
 							}	
 						}
 						$sort_spec[$last_spec] = $tab_asso;
-					}  //tant que $tab et $sort_lieu ont un nbre d'elts !=	
-						
+					}  
 					ksort($sort_spec);
 
 
@@ -193,29 +190,26 @@
 								$spectacle = $key;
 								echo "<div class=\"Spectacle\">\n";
 								echo "<titrespectacle id=\"labelSpectacle_1\"><h2> " . $spectacle . "</h2></titrespectacle>\n";
-							// 	switch ($line) {
-							// 		case "Tartuffe ou l'imposteur":
-							// 				echo "<figure id=\"TitreSpectacle\">\n<img scr=\"1.jpg\">";
-							// 				break;
-							// 		case "Les confessions : Les années de Jeunesse":
-							// 				echo "<figure id=\"spectacle\">\n<img scr=\"2.jpg\">";
-							// 				break;
-							// 		case " Mademoiselle Julie":
-							// 				echo "<figure id=\"spectacle\">\n<img scr=\"3.jpg\">";
-							// 				break;
-							// }
 								echo "<table>\n";
 								
 							}
 						
 						echo "<tr>\n<td>";
-						echo "<Horaire> Le " . $value2[0] . " " . " à " . $value2[1] . "</Horaire> " .  "par <troupe>" . $value2[5] . "</troupe><br/>\n";
-						echo "</td>\n <td>Reserver</td></tr>";
-						}
+						echo "<Horaire> Le " . $value2[0] . " " . " à " . $value2[1] . "</Horaire>, " . "au <Lieu>" . $value2[3] . " à " . $value2[4] . "</Lieu>, par <troupe>" . $value2[5] . "</troupe><br/>\n";
+						echo "</td>\n";
+						echo "<form action='reservation.php' method='post'>\n";
+						echo "<input type=\"submit\" value=\"Reserver\">\n";
+						echo "<input name='titre' type=hidden value=\"" . $value2[2] . "\">\n";
+						echo "<input name='date' type=hidden value=\"" . $value2[0] . "\">\n";
+						echo "<input name='heure' type=hidden value=\"" . $value2[1] . "\">\n";
+						echo "<input name='lieu' type=hidden value=\"" . $value2[3] . "\">\n";
+						echo "<input name='ville' type=hidden value=\"" . $value2[4] . "\">\n";
+						echo "<input name='troupe' type=hidden value=\"" . $value2[5] . "\">\n";
+						echo "\n</form> \n</td> \n</tr>\n";						}
 					}
 						
 				
-					
+					echo "</table>\n";
 					echo "</div><!--class=\"decalage\"-->\n</main>\n";
 					fclose($handle);
 					
