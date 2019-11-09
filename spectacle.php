@@ -158,7 +158,6 @@
 
 					$sort_spec = array();	//Pour y mettre le tableau trié en fonction des spectacles
 					$last_spec = "null";
-					$spec_aplh = " ";
 					while(count($tab)>0){ 
 						foreach($tab as $line){//parcourir le tableau pour chercher le nouveau $last_spec
 							if($last_spec!= $line[2]){
@@ -196,7 +195,7 @@
 						
 						echo "<tr>\n<td>";
 						echo "<Horaire> Le " . $value2[0] . " " . " à " . $value2[1] . "</Horaire>, " . "au <Lieu>" . $value2[3] . " à " . $value2[4] . "</Lieu>, par <troupe>" . $value2[5] . "</troupe><br/>\n";
-						echo "</td>\n";
+						echo "</td>\n <td>";
 						echo "<form action='reservation.php' method='post'>\n";
 						echo "<input type=\"submit\" value=\"Reserver\">\n";
 						echo "<input name='titre' type=hidden value=\"" . $value2[2] . "\">\n";
