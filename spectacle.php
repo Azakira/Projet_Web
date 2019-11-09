@@ -223,7 +223,7 @@
 								echo "<div class=\"Spectacle\">\n";
 								echo "<titreSpectacle id=\"" . labelSpectacle . $i . "\"><h2> " . $spectacle . "</h2></titreSpectacle>\n";
 								echo "<figure id=\"spectacle\">\n";
-								echo "<img src = \"".$i .".jpg"."\"/>";
+								echo "<img src = \"".$i .".jpg"."\"/ alt=\" Barbara, où rêvent mes saisons\" width= \"100%\" height= \"100%\">";
 								echo "</figure>";
 								echo "<table>\n";
 								
