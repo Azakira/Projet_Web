@@ -27,9 +27,16 @@
 		</div>
 		
 		<main>
-			<div class="decalage">
-				<br/>
-				<?php 
+			<section>
+				<div class="decalage">
+					<h2> Quatres demeures de l'Allier, un musée et une église vous ouvrent leurs grilles pour assister aux représentations théâtrales.
+					</h2>
+					<p>Coissisez un lieu en cliquant sur son bouton (dans le menu de la page) pour voir la programmation qu'il accueille puis selectionnez les spectacles qui s'y jouent et vous intéresse.
+					</p>
+					<figure> <img src="mapCastle.jpg" alt= "Infographie des châteaux dans le département" width="100%" height="100%">
+					</figure>
+					<br/>
+					<?php 
 					
 					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
 						fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
@@ -76,8 +83,10 @@
 							if($lieu != $line[3]){
 								if($lieu != "null"){
 									echo "</table>\n";
+									echo "</div><!--class=\"Lieu\"-->\n";
 								}
 								$lieu = $line[3];
+								echo "<div class=\"Lieu\">\n";
 								echo "<h2> " . $lieu . ", " . $line[4] . "</h2>\n";
 								echo "<table>\n";
 							}
