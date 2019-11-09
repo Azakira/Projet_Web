@@ -222,6 +222,9 @@
 								$spectacle = $key;
 								echo "<div class=\"Spectacle\">\n";
 								echo "<titreSpectacle id=\"" . labelSpectacle . $i . "\"><h2> " . $spectacle . "</h2></titreSpectacle>\n";
+								echo "<figure id=\"spectacle\">\n";
+								echo "<img src = \"".$i .".jpeg"."\"/>";
+								echo "</figure>";
 								echo "<table>\n";
 								
 							}
