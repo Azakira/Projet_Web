@@ -24,7 +24,7 @@
 				<li>Tarifs</li>
 			</ul>			
 			<div class="riquiqui">
-				<ul class="nav">
+				<ul class="nav"> <!-- id labelSpectacle qui permet de se rendre à partir du menu directement sur le spectacle recherché sur la page-->
 					<a href="#labelSpectacle1">
 						<li><titreSpectacle> Barbara, où rêvent mes saisons <titreSpectacle></li>
 					</a>
@@ -221,9 +221,9 @@
 								}
 								$spectacle = $key;
 								echo "<div class=\"Spectacle\">\n";
-								echo "<titreSpectacle id=\"" . labelSpectacle . $i . "\"><h2> " . $spectacle . "</h2></titreSpectacle>\n";
+								echo "<h2><titreSpectacle id=\"" . labelSpectacle . $i . "\"> " . $spectacle . "</titreSpectacle>" .", par <troupe> ". $value2[5] . "</troupe></h2>\n";
 								echo "<figure id=\"spectacle\">\n";
-								echo "<img src = \"".$i .".jpg"."\"/ alt=\" Barbara, où rêvent mes saisons\" width= \"100%\" height= \"100%\">";
+								echo "<img src = \"".$i .".jpg"."\"/ alt=\" " . $key . " " ."ATTENTION ERREUR de chargement d'image"."\" width= \"100%\" height= \"100%\">";
 								echo "</figure>";
 								echo "<table>\n";
 								
