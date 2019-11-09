@@ -25,28 +25,60 @@
 			</ul>			
 			<div class="riquiqui">
 				<ul class="nav">
- 					<a href="#labelSpectacle_1">
-						 <li><titreSpectacle>Tartuffe ou l'imposteur<titreSpectacle></l>
+					<a href="#labelSpectacle1">
+						<li><titreSpectacle> Barbara, où rêvent mes saisons <titreSpectacle></li>
 					</a>
-					<li>Les confessions : Les années de Jeunesse</li>
-					<li>Mademoiselle Julie</li>
-					<li>Le marchand de Venise</li>
-					<li>La gloire de mon père</li>
-					<li>Le château de ma mère</li>
-					<li>Les soliloques de Mariette</li>
- 					<a href="Festival2018ProgrammationParSpectacle.php#labelSpectacle_8">
-						 <li><titreSpectacle> Barbara, où rêvent mes saisons<titreSpectacle></l>
+					<a href="#labelSpectacle2">
+					    <li><titreSpectacle> Fricassée de berniques sur lit de Prévert </titreSpectacle></li>
 					</a>
-					<li>Le prophète</li>
-					<li>Le mariage</li>
-					<li>Les confessions : Les années de Maturité</li>
-					<li>Titre Provisoire</li>
-					<li> La demande en mariage et L'ours</li>
-					<li> Fricassée de berniques sur lit de Prévert</li>
-					<li>Les confessions : Les années de Sagesse</li>
-					<li>Hugo es tu là?</li>
-					<li>La promesse de l'aube</li>
-					<li>Port Racines</li>
+					<a href="#labelSpectacle3">
+					    <li><titreSpectacle> Hugo es tu là? </titreSpectacle></li>
+					</a>
+					<a href="#labelSpectacle4">
+					    <li><titreSpectacle> La demande en mariage et L'ours </titreSpectacle></li>
+					</a>
+					<a href="#labelSpectacle5">
+					    <li><titreSpectacle> La gloire de mon père </titreSpectacle></li>
+					</a>
+					<a href="#labelSpectacle6">
+					    <li><titreSpectacle> La promesse de l'aube </titreSpectacle></li>
+					</a>															
+ 					<a href="#labelSpectacle7">
+						 <li><titreSpectacle> Le Tartuffe ou l'imposteur<titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle8">
+						 <li><titreSpectacle> Le château de ma mère <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle9">
+						 <li><titreSpectacle> Le marchand de Venise <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle10">
+						 <li><titreSpectacle> Le mariage <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle11">
+						 <li><titreSpectacle> Le prophète <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle12">
+						 <li><titreSpectacle> Les confessions : Les années de Jeunesse <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle13">
+						 <li><titreSpectacle> Les confessions : Les années de Maturité <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle14">
+						 <li><titreSpectacle> Les confessions : Les années de Sagesse <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle15">
+						 <li><titreSpectacle> Les soliloques de Mariette <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle16">
+						 <li><titreSpectacle> Mademoiselle Julie <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle17">
+						 <li><titreSpectacle> Port Racines <titreSpectacle></l>
+					</a>
+					<a href="#labelSpectacle18">
+						 <li><titreSpectacle> Titre Provisoire <titreSpectacle></l>
+					</a>
 				</ul>
 			</div><!--class="riquiqui"-->
 		</div>
@@ -176,10 +208,11 @@
 					}  
 					ksort($sort_spec);
 
-
-					foreach($sort_spec as $key => $value){		//Boucle pour l'affichage html
+					$i =0;
+					foreach($sort_spec as $key => $value){	$i=$i+1;//Boucle pour l'affichage html
 						foreach($value as $key2 => $value2){
 						
+
 							if($spectacle != $key){
 								if($spectacle != "null"){
 									echo "</table>\n";
@@ -188,7 +221,7 @@
 								}
 								$spectacle = $key;
 								echo "<div class=\"Spectacle\">\n";
-								echo "<titrespectacle id=\"labelSpectacle_1\"><h2> " . $spectacle . "</h2></titrespectacle>\n";
+								echo "<titreSpectacle id=\"" . labelSpectacle . $i . "\"><h2> " . $spectacle . "</h2></titreSpectacle>\n";
 								echo "<table>\n";
 								
 							}
