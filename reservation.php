@@ -31,6 +31,19 @@
 				<br/>
 		
 				<?php
+
+					// if (($handle = fopen("distanceVille.csv", "r")) !== FALSE) {
+					// 	//fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
+					// 	// $spectacle = "null";
+					// 	$tab = array();
+					// 	while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+					// 		foreach($data as $value){
+					// 			echo $data[$i] . "<br/>\n"
+					// 		}
+					// 	}
+					// }
+					// fclose($handle);
+
 					$spectacle = array(
 						"titre" => $_POST['titre'],
 						"date"  => $_POST['date'],

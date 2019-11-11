@@ -174,7 +174,7 @@
 					while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
 						
 						foreach($data as $value) {
-							$replaced = preg_replace_callback(
+							$replaced = preg_replace_callback( // pour résoudre le problème de Barbara
 								'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 								function ($match){
 									$temp = preg_replace("[,]", '&#44;', $match);
@@ -221,7 +221,7 @@
 								}
 								$spectacle = $key;
 								echo "<div class=\"Spectacle\">\n";
-								echo "<h2><titreSpectacle id=\"" . labelSpectacle . $i . "\"> " . $spectacle . "</titreSpectacle>" .", par <troupe> ". $value2[5] . "</troupe></h2>\n";
+								echo "<h2><titreSpectacle id=\"" . "labelSpectacle" . $i . "\"> " . $spectacle . "</titreSpectacle>" .", par <troupe> ". $value2[5] . "</troupe></h2>\n";
 								echo "<figure id=\"spectacle\">\n";
 								echo "<img src = \"".$i .".jpg"."\"/ alt=\" " . $key . " " ."ATTENTION ERREUR de chargement d'image"."\" width= \"100%\" height= \"100%\">";
 								echo "</figure>";
