@@ -177,9 +177,10 @@
 							$replaced = preg_replace_callback( // pour résoudre le problème de Barbara
 								'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 								function ($match){
-									$temp = preg_replace("[,]", '&#44;', $match);
-									implode($temp);
-									return $temp[0];
+										$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+										$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
+										implode($match); //concatene le tout
+										return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 								},
 								$value
 							);
