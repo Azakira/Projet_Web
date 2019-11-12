@@ -178,12 +178,15 @@
 								'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 								function ($match){
 										$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
-										$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
+										$match = preg_replace("[\"]", '', $match); //retire les guillemets
 										implode($match); //concatene le tout
 										return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 								},
 								$value
 							);
+							
+							$replaced = preg_replace("[']", '&#146;', $replaced); //remplace les apostrophes par le symbole html
+							
 							$fields = preg_split("[,]", $replaced);
 							array_push($tab, $fields);
 						}
@@ -227,23 +230,23 @@
 								echo "<img src = \"".$i .".jpg"."\"/ alt=\" " . $key . " " ."ATTENTION ERREUR de chargement d'image"."\" width= \"100%\" height= \"100%\">";
 								echo "</figure>";
 								echo "<table>\n";
-								
 							}
 						
-						echo "<tr>\n<td>";
-						echo "<Horaire> Le " . $value2[0] . " " . " à " . $value2[1] . "</Horaire>, " . "au <Lieu>" . $value2[3] . " à " . $value2[4] . "</Lieu>, par <troupe>" . $value2[5] . "</troupe><br/>\n";
-						echo "</td>\n <td>";
-						echo "<form action='reservation.php' method='post'>\n";
-						echo "<input type=\"submit\" value=\"Reserver\">\n";
-						echo "<input name='titre' type=hidden value=\"" . $value2[2] . "\">\n";
-						echo "<input name='date' type=hidden value=\"" . $value2[0] . "\">\n";
-						echo "<input name='heure' type=hidden value=\"" . $value2[1] . "\">\n";
-						echo "<input name='lieu' type=hidden value=\"" . $value2[3] . "\">\n";
-						echo "<input name='ville' type=hidden value=\"" . $value2[4] . "\">\n";
-						echo "<input name='troupe' type=hidden value=\"" . $value2[5] . "\">\n";
-						echo "\n</form> \n</td> \n</tr>\n";						}
+							echo "<tr>\n<td>";
+							echo "<Horaire> Le " . $value2[0] . " " . " à " . $value2[1] . "</Horaire>, " . "au <Lieu>" . $value2[3] . " à " . $value2[4] . "</Lieu>, par <troupe>" . $value2[5] . "</troupe><br/>\n";
+							echo "</td>\n <td>";
+							echo "<form action='reservation.php' method='post'>\n";
+							echo "<input type=\"submit\" value=\"Reserver\">\n";
+							echo "<input name='titre' type=hidden value=\"" . $value2[2] . "\">\n";
+							echo "<input name='date' type=hidden value=\"" . $value2[0] . "\">\n";
+							echo "<input name='heure' type=hidden value=\"" . $value2[1] . "\">\n";
+							echo "<input name='lieu' type=hidden value=\"" . $value2[3] . "\">\n";
+							echo "<input name='ville' type=hidden value=\"" . $value2[4] . "\">\n";
+							echo "<input name='troupe' type=hidden value=\"" . $value2[5] . "\">\n";
+							echo "\n</form> \n</td> \n</tr>\n";						
+						}
 					}
-						
+					
 				
 					echo "</table>\n";
 					echo "</div><!--class=\"decalage\"-->\n</main>\n";

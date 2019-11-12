@@ -34,13 +34,15 @@
 								$replaced = preg_replace_callback(
 									'/"(\\\\[\\\\"]|[^\\\\"])*"/',
 									function ($match){
-										$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
-										$match = preg_replace("[\"]", '&#34;', $match); //remplace les guillemets par le symbole html
+										$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules entre guillemets par le symbole html
+										$match = preg_replace("[\"]", '', $match); //retire les guillemets
 										implode($match); //concatene le tout
 										return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 									},
 									$value
 								);
+								
+								$replaced = preg_replace("[']", '&#146;', $replaced); //remplace les apostrophes par le symbole html
 								
 								$fields = preg_split("[,]", $replaced);
 								if($jour != $fields[0]){
