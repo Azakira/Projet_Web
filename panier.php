@@ -12,7 +12,7 @@
 	</head>
 	
 	<body>
-		<div class="bandeau">						
+		<div class="bandeau">
 			<h1>Panier</h1>
 		</div ><!--class="bandeau"-->
 		<div class="menu">
@@ -20,18 +20,34 @@
 				<a href="index.php">Le site :</a>
 				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par Jour</a></li>
-				<li><a href="lieu.php">Lieu par Lieu</a></li>	
+				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
 				<li><a href="panier.html">Panier</a></li>
 				<li>Tarifs</li>
-			</ul>			
-		</div>
+			</ul>
+		</div><!--class="menu"-->
 		
 		<main>
 			<section>
 				<div class="decalage">
-					<br/>
-				</div>
-	  	</section>
+					<?php 
+						if (isset($_POST['spectacle'])){
+							$commande = array(
+								"spectacle"   => unserialize($_POST['spectacle']),
+								"adulte"	  => $_POST['adulte'],
+								"enfant"	  => $_POST['enfant'],
+								"tarif_reduit"=> $_POST['tarif_reduit']
+							);
+							array_push($_SESSION['panier'], $commande);
+						}
+						
+						foreach($_SESSION['panier'] as $commande){
+							echo "<spectacle>" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</spectacle></br>";
+						}
+						
+					?>
+				</div><!--class="decalage"-->
+			</section>
 		</main>
+	</body>
 </html>
