@@ -9,8 +9,14 @@
 		<title>Panier</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
-		<style> tarif { color : blue;
-		}
+		<style>  		table{
+							border: 2mm ridge rgba(71, 141, 235, .6);
+						}
+
+						td.tarif { padding-top: 5px;
+							padding-bottom: 5px;							
+						}
+
 		</style>
 	</head>
 	
@@ -25,7 +31,7 @@
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
-				<li><a href="panier.html">Panier</a></li>
+				<li><a href="panier.php">Panier</a></li>
 				<li>Tarifs</li>
 			</ul>
 		</div><!--class="menu"-->
@@ -47,11 +53,17 @@
 						foreach($_SESSION['panier'] as $commande){
 							echo "<div class=\"Spectacle\">";
 							echo "<table>\n";
-							echo "<tr>\n<td>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</br>\n";
-							echo "<tarif><td>" . "Tarif Adulte: " . $commande['adulte'] . "</td>\n";
-							echo "<td> Tarif enfant: " . $commande['enfant'] . "</td>\n";
-							echo "<td> Tarif Reduit: " . $commande['tarif_reduit'] . "</td></tarif></table></div><!--class=\"decalage\"--></tr>\n";
-
+							echo "<tr>\n<td>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</td>\n";
+							echo "<td class=\"tarif\">" . "Tarif Adulte: " . $commande['adulte'] . "</td>\n";
+							echo "<td class=\"tarif\"> Tarif enfant: " . $commande['enfant'] . "</td>\n";
+							echo "<td class=\"tarif\"> Tarif Reduit: " . $commande['tarif_reduit'] . "</td>";
+							echo "<td><form method=\"post\" action=\"index.php\">
+								<input type=\"submit\" value=\"Modifier\" /> 
+								</form></td>
+								</table>
+								</div><!--class=\"Spectacle\"-->
+								</tr>\n";
+								//regarder la diff entre submit et value pour le type
 						}
 						
 					?>
