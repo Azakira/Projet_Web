@@ -48,7 +48,8 @@
 								"enfant"	  => $_POST['enfant'],
 								"tarif_reduit"=> $_POST['tarif_reduit']
 							);
-							array_push($_SESSION['panier'], $commande);
+							if ($commande['adulte']+$commande['enfant']+$commande['tarif_reduit']>0)
+								array_push($_SESSION['panier'], $commande); //si commande a 0 tickets, on ne push pas
 						}
 						if (isset($_POST['reset'])){
 							$_SESSION['panier'] = array();
@@ -60,17 +61,15 @@
 						
 						foreach($_SESSION['panier'] as $commande){
 							echo "<div class=\"Spectacle\">";
-							echo "<table>\n";
-							echo "<tr>\n<td><thead>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</td>\n";
-							echo "<td class=\"tarif\">" . "Tarif Adulte: " . $commande['adulte'] . "</thead></td>\n";
-							echo "<td class=\"tarif\"> Tarif enfant: " . $commande['enfant'] . "</td>\n";
-							echo "<td class=\"tarif\"> Tarif Reduit: " . $commande['tarif_reduit'] . "</td>";
-							echo "<td><form method=\"post\" action=\"index.php\">
+							echo "\n<titreSpectacle>" . $commande['spectacle']['titre'] . "</titreSpectacle>, le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</br>\n";
+							echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
+							echo " Tickets enfant: " . $commande['enfant'] . "</br>\n";
+							echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
+							echo "<form method=\"post\" action=\"index.php\">
 								<input type=\"submit\" value=\"Modifier\" /> 
 								</form></td>
 								</table>
-								</div><!--class=\"Spectacle\"-->
-								</tr>\n";
+								</div><!--class=\"Spectacle\"-->";
 								//regarder la diff entre submit et value pour le type
 						}
 						
