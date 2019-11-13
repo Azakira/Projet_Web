@@ -43,16 +43,14 @@
 							);
 							array_push($_SESSION['panier'], $commande);
 						}
-
-						echo "<table>";
+						
 						foreach($_SESSION['panier'] as $commande){
-							if(empty($_SESSION['panier'])){
-								echo"</table>";
-							}
-							echo "<spectacle></br><tr><td>" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</spectacle></br>\n";
+							echo "<div class=\"Spectacle\">";
+							echo "<table>\n";
+							echo "<tr>\n<td>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</br>\n";
 							echo "<tarif><td>" . "Tarif Adulte: " . $commande['adulte'] . "</td>\n";
 							echo "<td> Tarif enfant: " . $commande['enfant'] . "</td>\n";
-							echo "<td> Tarif Reduit: " . $commande['tarif_reduit'] . "</td></tarif>\n";
+							echo "<td> Tarif Reduit: " . $commande['tarif_reduit'] . "</td></tarif></table></div><!--class=\"decalage\"--></tr>\n";
 
 						}
 						
