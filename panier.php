@@ -50,6 +50,13 @@
 							);
 							array_push($_SESSION['panier'], $commande);
 						}
+						if (isset($_POST['reset'])){
+							$_SESSION['panier'] = array();
+						}
+						
+						echo "<form action='panier.php' method='post'>\n";
+						echo "<input name='reset' type='hidden' value='true'>\n";
+						echo "<input type=submit value='Réinitialiser'>\n</form></br>\n";
 						
 						foreach($_SESSION['panier'] as $commande){
 							echo "<div class=\"Spectacle\">";
