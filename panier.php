@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
 		<style>  		table{
 							border: 2mm ridge rgba(71, 141, 235, .6);
+
 						}
 
 						td.tarif { padding-top: 5px;
@@ -53,8 +54,8 @@
 						foreach($_SESSION['panier'] as $commande){
 							echo "<div class=\"Spectacle\">";
 							echo "<table>\n";
-							echo "<tr>\n<td>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</td>\n";
-							echo "<td class=\"tarif\">" . "Tarif Adulte: " . $commande['adulte'] . "</td>\n";
+							echo "<tr>\n<td><thead>\n" . $commande['spectacle']['titre'] . ", le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</td>\n";
+							echo "<td class=\"tarif\">" . "Tarif Adulte: " . $commande['adulte'] . "</thead></td>\n";
 							echo "<td class=\"tarif\"> Tarif enfant: " . $commande['enfant'] . "</td>\n";
 							echo "<td class=\"tarif\"> Tarif Reduit: " . $commande['tarif_reduit'] . "</td>";
 							echo "<td><form method=\"post\" action=\"index.php\">
