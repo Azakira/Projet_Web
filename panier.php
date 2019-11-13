@@ -48,12 +48,30 @@
 								"enfant"	  => $_POST['enfant'],
 								"tarif_reduit"=> $_POST['tarif_reduit']
 							);
+							foreach($_SESSION['panier'] as $i => $com){
+								if ($com['spectacle'] == $commande['spectacle']){
+									$commande['adulte'] = $com['adulte']+$commande['adulte'];
+									$commande['enfant'] = $com['enfant']+$commande['enfant'];
+									$commande['tarif_reduit'] = $com['tarif_reduit']+$commande['tarif_reduit'];
+									unset($_SESSION['panier'][$i]);
+								}
+							}
 							if ($commande['adulte']+$commande['enfant']+$commande['tarif_reduit']>0)
 								array_push($_SESSION['panier'], $commande); //si commande a 0 tickets, on ne push pas
 						}
+						
 						if (isset($_POST['reset'])){
 							$_SESSION['panier'] = array();
 						}
+						
+						if (isset($_POST['supprSpec'])){
+							foreach($_SESSION['panier'] as $i => $com){
+								$unsSuppr = unserialize($_POST['supprSpec']);
+								if($unsSuppr == $com['spectacle'])
+									unset($_SESSION['panier'][$i]);
+							}
+						}
+						
 						
 						echo "<form action='panier.php' method='post'>\n";
 						echo "<input name='reset' type='hidden' value='true'>\n";
@@ -65,12 +83,15 @@
 							echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
 							echo " Tickets enfant: " . $commande['enfant'] . "</br>\n";
 							echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
-							echo "<form method=\"post\" action=\"index.php\">
-								<input type=\"submit\" value=\"Modifier\" /> 
-								</form></td>
-								</table>
-								</div><!--class=\"Spectacle\"-->";
-								//regarder la diff entre submit et value pour le type
+							echo "<form method=\"post\" action=\"index.php\">\n";
+							echo "<input type=\"submit\" value=\"Modifier\" />\n";
+							echo "</form>\n";
+							echo "<form method=\"post\" action=\"panier.php\">\n";
+							echo "<input name='supprSpec' type='hidden' value='". serialize($commande['spectacle']) ."'>\n";
+							echo "<input type=\"submit\" value=\"Supprimer\" />\n";
+							echo "</form>\n";
+							echo "</div><!--class=\"Spectacle\"-->";
+							//regarder la diff entre submit et value pour le type
 						}
 						
 					?>
