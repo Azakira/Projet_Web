@@ -48,12 +48,21 @@
 								"enfant"	  => $_POST['enfant'],
 								"tarif_reduit"=> $_POST['tarif_reduit']
 							);
-							foreach($_SESSION['panier'] as $i => $com){
-								if ($com['spectacle'] == $commande['spectacle']){
-									$commande['adulte'] = $com['adulte']+$commande['adulte'];
-									$commande['enfant'] = $com['enfant']+$commande['enfant'];
-									$commande['tarif_reduit'] = $com['tarif_reduit']+$commande['tarif_reduit'];
-									unset($_SESSION['panier'][$i]);
+							
+							if(isset($_POST['is_modified'])){ 					//si commande modifiee
+								foreach($_SESSION['panier'] as $i => $com){
+									if ($com['spectacle'] == $commande['spectacle']){
+										unset($_SESSION['panier'][$i]);			//on supprime la ligne correspondante dans le panier
+									}
+								}
+							} else { 											//sinon normal
+								foreach($_SESSION['panier'] as $i => $com){
+									if ($com['spectacle'] == $commande['spectacle']){
+										$commande['adulte'] = $com['adulte']+$commande['adulte'];
+										$commande['enfant'] = $com['enfant']+$commande['enfant'];
+										$commande['tarif_reduit'] = $com['tarif_reduit']+$commande['tarif_reduit'];
+										unset($_SESSION['panier'][$i]);
+									}
 								}
 							}
 							if ($commande['adulte']+$commande['enfant']+$commande['tarif_reduit']>0)
@@ -83,7 +92,8 @@
 							echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
 							echo " Tickets enfant: " . $commande['enfant'] . "</br>\n";
 							echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
-							echo "<form method=\"post\" action=\"index.php\">\n";
+							echo "<form method=\"post\" action=\"reservation.php\">\n";
+							echo "<input name='modify' type='hidden' value='" . serialize($commande) . "'>\n";
 							echo "<input type=\"submit\" value=\"Modifier\" />\n";
 							echo "</form>\n";
 							echo "<form method=\"post\" action=\"panier.php\">\n";
