@@ -18,7 +18,7 @@
 		$adulte = $enfant = $tarif_reduit = 0;
 		$spectacleText = serialize($spectacle);
 		$is_modified = "false";
-		} else if (isset ($_POST['modify'])){ //si on vient de modifier (du panier)
+	} else if (isset ($_POST['modify'])){ //si on vient de modifier (du panier)
 			$commande = unserialize($_POST['modify']);
 			$spectacle = $commande['spectacle'];
 			$spectacleText = serialize($spectacle);
@@ -28,7 +28,7 @@
 			$tarif_reduit = $commande['tarif_reduit'];
 			
 			$is_modified = "true";
-		} else { //sinon (si on vient de nulle part) 
+	} else { //sinon (si on vient de nulle part) 
 			header('Location: http://localhost/Projet_Web/erreur.php');
 			exit();
 		}

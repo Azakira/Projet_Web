@@ -49,7 +49,7 @@
 								"tarif_reduit"=> $_POST['tarif_reduit']
 							);
 							
-							if(isset($_POST['is_modified'])){ 					//si commande modifiee
+							if($_POST['is_modified'] == "true"){ 					//si commande modifiee
 								foreach($_SESSION['panier'] as $i => $com){
 									if ($com['spectacle'] == $commande['spectacle']){
 										unset($_SESSION['panier'][$i]);			//on supprime la ligne correspondante dans le panier
