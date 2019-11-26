@@ -89,9 +89,14 @@
 						foreach($_SESSION['panier'] as $commande){
 							echo "<div class=\"Spectacle\">";
 							echo "\n<titreSpectacle>" . $commande['spectacle']['titre'] . "</titreSpectacle>, le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</br>\n";
-							echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
-							echo " Tickets enfant: " . $commande['enfant'] . "</br>\n";
-							echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
+							
+							if($commande['adulte'] > 0)
+								echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
+							if($commande['enfant'] > 0)
+								echo " Tickets enfant: " . $commande['enfant'] . "</br>\n";
+							if($commande['tarif_reduit'] > 0)
+								echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
+							
 							echo "<form method=\"post\" action=\"reservation.php\">\n";
 							echo "<input name='modify' type='hidden' value='" . serialize($commande) . "'>\n";
 							echo "<input type=\"submit\" value=\"Modifier\" />\n";
