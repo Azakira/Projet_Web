@@ -133,13 +133,26 @@
 					
 					echo "<select name='titre'>\n";
 					foreach($titresSpectacles as $i => $val){
-						echo "<!--" . $i . " == " . $spectacle['titre'] . "-->\n";
 						echo "<option value='" . $i . "'";
 						if(compareHTML($spectacle['titre'], $i))
 							echo "selected";
 						echo ">" . $i . "</option>\n";
 					}
 					echo "</select>\n";
+					
+					foreach($titresSpectacles as $title => $representations){
+						echo "<select name='" . $title . "'>\n";
+						foreach($representations as $rep){
+							echo "<option value='" . $rep . "'";
+							//selected code
+							echo ">";
+							foreach($rep as $champ){
+								echo $champ;
+							}
+							echo "</option>\n";
+						}
+						echo "</select>";
+					}
 					
 					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe> à <lieu>" . $spectacle['lieu'] . ", " . $spectacle['ville'] . ".</lieu><br/>\n</td>\n";
 					echo "<form action='panier.php' method='POST'>\n";
@@ -155,7 +168,7 @@
 					echo "Places tarif réduit: <button type='button' onclick='if (document.getElementById(\"tarif_reduit\").value > 0) {document.getElementById(\"tarif_reduit\").value--}'> - </button>\n";
 					echo "<input id='tarif_reduit' type='number' name='tarif_reduit' value='" . $tarif_reduit . "' min='0' required>\n";
 					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br>\n";
-					
+						
 					echo "<input name='spectacle' type='hidden' value='" . $spectacleText ."'>";
 					echo "<input name='is_modified' type='hidden' value='" . $is_modified ."'>"; //on envoie $is_modified en hidden: false=reservation normale, true=modification
 					
