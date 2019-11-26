@@ -4,6 +4,60 @@
 		$_SESSION['panier'] = array();
 	}
 	
+	$titresSpectacles = array();
+	
+	if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) {
+		fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
+		$last_spec = "null";
+		$tab = array();
+		while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+		
+			foreach($data as $value) {
+				$replaced = preg_replace_callback(
+					'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+					function ($match){
+						$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+						$match = preg_replace("[\"]", '', $match); //retire les guillemets
+						implode($match); //concatene le tout
+						return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+					},
+				$value
+				);
+							
+				$replaced = preg_replace("[']", '&#146;', $replaced); //remplace les apostrophes par le symbole html
+				
+				$fields = preg_split("[,]", $replaced);
+				array_push($tab, $fields);
+			}
+		}
+		while(count($tab)>0){ 
+			foreach($tab as $line){//parcourir le tableau pour chercher le nouveau $last_spec
+				if($last_spec!= $line[2]){
+					$last_spec = $line[2];
+					break 1;
+				}
+			}
+			$tab_asso = array(); //tableau pour mettre les spectacles en fonction du last_spec et est réinitialiser pour le prochain last_spec
+			foreach($tab as $i => $line){
+				if($tab[$i][2] == $last_spec){	 //si le titreDeSpectacle est égale au last_spec alors on met sa ligne le concernant dans tab_asso et on retire la ligne de tab
+					array_push($tab_asso, $tab[$i]);
+					unset($tab[$i]);
+				}	
+			}
+			$titresSpectacles[$last_spec] = $tab_asso;
+		}  
+		ksort($titresSpectacles);
+		
+		$titres = array();
+		foreach($titresSpectacles as $line){
+			foreach($line as $elt){
+				foreach($elt as $wtf){
+					array_push($titres, $wtf);
+				}
+			}
+		}
+	}
+	
 	//code déplacé en haut pour pouvoir utilisé header(), devant être appelée avant tt affichage html
 	
 	if (isset($_POST['titre'])){ //si on vient de reserver un spectacle
@@ -60,20 +114,46 @@
 				<br/>
 		
 				<?php
+					function compareHTML($str1, $str2){
+						$str1 = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
+							function ($match){
+								$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+								$match = preg_replace("[’]", '&#146;', $match); //remplace les apostrophes par le symbole html
+								implode($match); //concatene le tout
+								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+							},
+							$str1
+						);
+						if($str1 == $str2)
+							return true;
+						return false;
+					}
+					
+					
+					
+					echo "<select name='titre'>\n";
+					foreach($titresSpectacles as $i => $val){
+						echo "<!--" . $i . " == " . $spectacle['titre'] . "-->\n";
+						echo "<option value='" . $i . "'";
+						if(compareHTML($spectacle['titre'], $i))
+							echo "selected";
+						echo ">" . $i . "</option>\n";
+					}
+					echo "</select>\n";
 					
 					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe> à <lieu>" . $spectacle['lieu'] . ", " . $spectacle['ville'] . ".</lieu><br/>\n</td>\n";
 					echo "<form action='panier.php' method='POST'>\n";
 					
 					echo "Places adulte: <button type='button' onclick='if (document.getElementById(\"adulte\").value > 0) {document.getElementById(\"adulte\").value--}'> - </button>\n";
-					echo "<input id='adulte' type='number' name='adulte' value='" . $adulte . "' min='0'>\n";
+					echo "<input id='adulte' type='number' name='adulte' value='" . $adulte . "' min='0' required>\n";
 					echo "<button type='button' onclick='document.getElementById(\"adulte\").value++'> + </button></br>\n";
 					
 					echo "Places enfant: <button type='button' onclick='if (document.getElementById(\"enfant\").value > 0) {document.getElementById(\"enfant\").value--}'> - </button>\n";
-					echo "<input id='enfant' type='number' name='enfant' value='" . $enfant . "'min='0'>\n";
+					echo "<input id='enfant' type='number' name='enfant' value='" . $enfant . "'min='0' required>\n";
 					echo "<button type='button' onclick='document.getElementById(\"enfant\").value++'> + </button></br>\n";
 					
 					echo "Places tarif réduit: <button type='button' onclick='if (document.getElementById(\"tarif_reduit\").value > 0) {document.getElementById(\"tarif_reduit\").value--}'> - </button>\n";
-					echo "<input id='tarif_reduit' type='number' name='tarif_reduit' value='" . $tarif_reduit . "' min='0'>\n";
+					echo "<input id='tarif_reduit' type='number' name='tarif_reduit' value='" . $tarif_reduit . "' min='0' required>\n";
 					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br>\n";
 					
 					echo "<input name='spectacle' type='hidden' value='" . $spectacleText ."'>";
