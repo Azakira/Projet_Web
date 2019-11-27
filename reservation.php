@@ -135,26 +135,27 @@
 					foreach($titresSpectacles as $i => $val){
 						echo "<option value='" . $i . "'";
 						if(compareHTML($spectacle['titre'], $i))
-							echo "selected";
+							echo " selected";
 						echo ">" . $i . "</option>\n";
 					}
-					echo "</select>\n";
+					echo "</select></br>\n";
 					
 					foreach($titresSpectacles as $title => $representations){
-						echo "<select name='" . $title . "'>\n";
+						echo "<select ";
+						if(!compareHTML($spectacle['titre'], $title))
+							echo "hidden ";
+						echo "name='" . $title . "'>\n";
 						foreach($representations as $rep){
-							echo "<option value='" . $rep . "'";
-							//selected code
+							echo "<option value='" . $rep . "'";//probleme
+							if($rep[0] == $spectacle['date'] && $rep[1] == $spectacle['heure'] && $rep[3] == $spectacle['lieu'] && $rep[5] == $spectacle['troupe'])
+								echo " selected";
 							echo ">";
-							foreach($rep as $champ){
-								echo $champ;
-							}
+							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
 							echo "</option>\n";
 						}
-						echo "</select>";
+						echo "</select>\n";
 					}
 					
-					echo "<titreSpectacle>". $spectacle['titre'] . "</titreSpectacle><Horaire> Le " . $spectacle['date'] . " à " . $spectacle['heure'] . "</Horaire>, " . " par <troupe>" . $spectacle['troupe'] . "</troupe> à <lieu>" . $spectacle['lieu'] . ", " . $spectacle['ville'] . ".</lieu><br/>\n</td>\n";
 					echo "<form action='panier.php' method='POST'>\n";
 					
 					echo "Places adulte: <button type='button' onclick='if (document.getElementById(\"adulte\").value > 0) {document.getElementById(\"adulte\").value--}'> - </button>\n";
