@@ -83,8 +83,8 @@
 			
 			$is_modified = "true";
 	} else { //sinon (si on vient de nulle part) 
-			header('Location: http://localhost/Projet_Web/erreur.php');
-			exit();
+			// header('Location: http://localhost/Projet_Web/erreur.php');
+			// exit();
 		}
 ?>
 <html>
@@ -132,6 +132,7 @@
 					
 					
 					echo "<select name='titre'>\n";
+					echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>";
 					foreach($titresSpectacles as $i => $val){
 						echo "<option value='" . $i . "'";
 						if(compareHTML($spectacle['titre'], $i))
@@ -139,15 +140,23 @@
 						echo ">" . $i . "</option>\n";
 					}
 					echo "</select></br>\n";
-					
 					foreach($titresSpectacles as $title => $representations){
 						echo "<select ";
 						if(!compareHTML($spectacle['titre'], $title))
-							echo "hidden ";
+							echo "type='hidden' ";
 						echo "name='" . $title . "'>\n";
+						echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>";
 						foreach($representations as $rep){
-							echo "<option value='" . $rep . "'";//probleme
-							if($rep[0] == $spectacle['date'] && $rep[1] == $spectacle['heure'] && $rep[3] == $spectacle['lieu'] && $rep[5] == $spectacle['troupe'])
+							$spectacleDDL = array( //pour Spectacle Drop Down List
+								"titre" => $title,
+								"date"  => $rep[0],
+								"heure" => $rep[1],
+								"lieu"  => $rep[3],
+								"troupe"=> $rep[5],
+								"ville" => $rep[4]
+							);
+							echo "<option value='" . serialize($spectacleDDL) . "'";// au milieu
+							if($rep[0] == $spectacleDDL['date'] && $rep[1] == $spectacleDDL['heure'] && $rep[3] == $spectacleDDL['lieu'] && $rep[5] == $spectacleDDL['troupe'])
 								echo " selected";
 							echo ">";
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
