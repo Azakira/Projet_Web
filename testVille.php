@@ -49,38 +49,50 @@
 
 		}
 
-		function distVille($tableau,$ville1,$ville2){
+		function distVille($tableau,$ville1,$ville2,$horaire){
+			$distTime = array();
 			$ind = -1;
 			$cpt =1;
+
 			foreach($tableau as $keyVille => $value1){
 				if($keyVille == $ville1){
+
 					$ind = $cpt;
 					break 1;
-				}else{
-					$cpt++;
-				}
+
+				}else{ $cpt++; }
+
 			}
 			if($ind == -1){
 				echo "La ville de votre 1er spectacle n'existe pas,veuillez rééssayer pls ";
 			}
+
 			else {
 				$cpt2=1;
 				$ind2=-1;
 				foreach($tableau as $keyVille2 => $value2){
-					 if($keyVille2 == $ville2){
+					if($keyVille2 == $ville2){
 					 	$ind2 = $cpt2;
 						//return $tableau[$ville1][$ind2];
-						return $timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
+						$timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
+						$timeAndDistance[0]= intval($timeAndDistance[0]);
+						$timeAndDistance[1]= intval($timeAndDistance[1]);
+						$time=intval($timeAndDistance[1]);
+						if($horaire >=17 and $horaire <=19)
+							$timeAndDistance[1]+=$timeAndDistance[1]*0.1;
 
-					}else{$cpt2++; }
+					}
+					else{ $cpt2++; }
 				}
+
 				if($ind2 == -1){
 					echo "La ville du 2eme spectacle n'existe pas,veuillez rééssayer pls ";
 				}
 			}
+			return $timeAndDistance;
 
 		}
-			distVille($villeAsso,"Monteignet","Clermont-Ferrand");
+			distVille($villeAsso,"Monteignet","Clermont-Ferrand",18);
 
 
 ?>
