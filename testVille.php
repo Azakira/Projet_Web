@@ -69,11 +69,10 @@
 				foreach($tableau as $keyVille2 => $value2){
 					 if($keyVille2 == $ville2){
 					 	$ind2 = $cpt2;
-						//echo $tableau[$ville1][$ind2];
-						return $tableau[$ville1][$ind2];
-						// $timeAndDistance = preg_split("/",$tableau[$ville1][$ind2]);
-					}
-					else{$cpt2++; }
+						//return $tableau[$ville1][$ind2];
+						return $timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
+
+					}else{$cpt2++; }
 				}
 				if($ind2 == -1){
 					echo "La ville du 2eme spectacle n'existe pas,veuillez rééssayer pls ";
