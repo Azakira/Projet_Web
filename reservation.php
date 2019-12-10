@@ -92,6 +92,17 @@
 		<title>Festival Théâtres de Bourbon : Réservation</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
+		
+		<!--<script type="text/javascript" src="reservation.js"></script>-->
+		<script>
+			console.log( "ready!" );
+			function testJS(value){
+				document.getElementById("test").innerHTML = ""+value;
+				Console.log("testButton");
+			}
+			
+			
+		</script>
 	</head>
 	
 	<body>
@@ -129,9 +140,15 @@
 						return false;
 					}
 					
+					/**
+					 *	TESTS
+					 *	
+					 **/
+					
+					echo "<p id=\"test\"> Testing block </p></br>\n";
 					
 					
-					echo "<select name='titre'>\n";
+					echo "<select name='titre' id='titre' onchange='testJS(this.value)'>\n";
 					echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>";
 					foreach($titresSpectacles as $i => $val){
 						echo "<option value='" . $i . "'";
@@ -141,11 +158,12 @@
 					}
 					echo "</select></br>\n";
 					foreach($titresSpectacles as $title => $representations){
+						echo "<div id='" . $title . "'>\n";
 						echo "<select ";
 						if(!compareHTML($spectacle['titre'], $title))
-							echo "type='hidden' ";
+							echo "hidden ";
 						echo "name='" . $title . "'>\n";
-						echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>";
+						echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>\n";
 						foreach($representations as $rep){
 							$spectacleDDL = array( //pour Spectacle Drop Down List
 								"titre" => $title,
@@ -162,7 +180,7 @@
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
 							echo "</option>\n";
 						}
-						echo "</select>\n";
+						echo "</select>\n</div><!--id=\"" . $title . "\"-->\n";
 					}
 					
 					echo "<form action='panier.php' method='POST'>\n";
