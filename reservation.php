@@ -93,20 +93,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
 		
-		<!--<script type="text/javascript" src="reservation.js"></script>-->
-		<script>
-			console.log( "ready!" );
-			function testJS(value){
-				document.getElementById("test").innerHTML = ""+value;
-				Console.log("testButton");
-			}
-			
-			
-		</script>
+		<script src="reservation.js"></script>
 	</head>
 	
 	<body>
-		<div class="bandeau">						
+		<div class="bandeau">
 			<h1> Festival Théâtres de Bourbon : Réservation</h1>
 		</div ><!--class="bandeau"-->
 		<div class="menu">
@@ -117,7 +108,7 @@
 				<li><a href="lieu.php">Lieu par Lieu</a></li>	
 				<li><a href="spectacle.php">Spectacles</a></li>
 				<li>Tarifs</li>
-			</ul>			
+			</ul>
 		</div>
 
 		<main>
@@ -148,8 +139,8 @@
 					echo "<p id=\"test\"> Testing block </p></br>\n";
 					
 					
-					echo "<select name='titre' id='titre' onchange='testJS(this.value)'>\n";
-					echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>";
+					echo "<select name='titre' id='titre' onchange='hiddenDDL2()'>\n";
+					echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>\n";
 					foreach($titresSpectacles as $i => $val){
 						echo "<option value='" . $i . "'";
 						if(compareHTML($spectacle['titre'], $i))
