@@ -96,7 +96,7 @@
 		<script src="reservation.js"></script>
 	</head>
 	
-	<body>
+	<body onload="hiddenDDL2()">
 		<div class="bandeau">
 			<h1> Festival Théâtres de Bourbon : Réservation</h1>
 		</div ><!--class="bandeau"-->
@@ -151,8 +151,10 @@
 					foreach($titresSpectacles as $title => $representations){
 						echo "<div id='" . $title . "'>\n";
 						echo "<select ";
+						/*
 						if(!compareHTML($spectacle['titre'], $title))
-							echo "hidden ";
+							echo "hidden "; //conflict w/ javascript fun.
+						*/
 						echo "name='" . $title . "'>\n";
 						echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>\n";
 						foreach($representations as $rep){

@@ -31,9 +31,8 @@ function hiddenDDL2(){
 	selectedTitre = titre.options[titre.selectedIndex].value;	
 	
 	for (let i = 1; i < titre.options.length; i++) {
-		ddlId = titre.options[i].value; 
+		ddlId = titre.options[i].value;
 		node = document.getElementById(ddlId);
-		nodeText = document.getElementById(ddlId).name;
 		if (ddlId == selectedTitre){
 			node.style.visibility = "visible";
 			node.style.height = "auto";
@@ -41,7 +40,7 @@ function hiddenDDL2(){
 			node.style.visibility = "hidden";
 			node.style.height = "0";
 		}
-		console.log(ddlId);
+		//console.log("ddlId= "+ddlId+"\nselTitre="+selectedTitre);
 	}
 }
 
