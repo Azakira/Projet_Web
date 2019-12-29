@@ -44,6 +44,12 @@ function hiddenDDL2(){
 	}
 }
 
+function price(){
+	ta =document.getElementById("adulte").value;
+	te = document.getElementById("enfant").value;
+	tr = document.getElementById("tarif_reduit").value;
+}
+
 function testJS(value){
 	document.getElementById("test").innerHTML = ""+value;
 	Console.log("testButton");

@@ -92,7 +92,11 @@
 		<title>Festival Théâtres de Bourbon : Réservation</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
-		
+		<style> th {
+					  background-color: #4CAF50;
+					  color: white;
+					}
+		</style>
 		<script src="reservation.js"></script>
 	</head>
 	
@@ -135,7 +139,7 @@
 					 *	TESTS
 					 *	
 					 **/
-					
+
 					echo "<p id=\"test\"> Testing block </p></br>\n";
 					
 					
@@ -175,24 +179,38 @@
 						}
 						echo "</select>\n</div><!--id=\"" . $title . "\"-->\n";
 					}
-					
+
 					echo "<form action='panier.php' method='POST'>\n";
 					
-					echo "Places adulte: <button type='button' onclick='if (document.getElementById(\"adulte\").value > 0) {document.getElementById(\"adulte\").value--}'> - </button>\n";
+					echo "<table><thead><tr> <th>Type de place</th>\n <th>nb de places</th>\n <th>Prix Unitaire</th><tr></thead>\n"; 
+
+					echo "<tr>";
+					echo " <td> Places adulte: </td>";					
+					echo "<td> <button type='button' onclick='if (document.getElementById(\"adulte\").value > 0) {document.getElementById(\"adulte\").value--}'> - </button>\n";
 					echo "<input id='adulte' type='number' name='adulte' value='" . $adulte . "' min='0' required>\n";
-					echo "<button type='button' onclick='document.getElementById(\"adulte\").value++'> + </button></br>\n";
-					
-					echo "Places enfant: <button type='button' onclick='if (document.getElementById(\"enfant\").value > 0) {document.getElementById(\"enfant\").value--}'> - </button>\n";
+					echo "<button type='button' onclick='document.getElementById(\"adulte\").value++'> + </button></br></td>\n";
+					echo "<td align ='center'> 15 € </td></tr>\n";
+										
+					echo "<tr>";
+					echo " <td> Places enfant: </td>";
+					echo "<td> <button type='button' onclick='if (document.getElementById(\"enfant\").value > 0) {document.getElementById(\"enfant\").value--}'> - </button>\n";
 					echo "<input id='enfant' type='number' name='enfant' value='" . $enfant . "'min='0' required>\n";
-					echo "<button type='button' onclick='document.getElementById(\"enfant\").value++'> + </button></br>\n";
+					echo "<button type='button' onclick='document.getElementById(\"enfant\").value++'> + </button></br></td>\n";
+					echo "<td align ='center'> 0 € </td></tr>\n";
 					
-					echo "Places tarif réduit: <button type='button' onclick='if (document.getElementById(\"tarif_reduit\").value > 0) {document.getElementById(\"tarif_reduit\").value--}'> - </button>\n";
+					echo "<tr>";
+					echo "<td> Places tarif réduit: </td>";
+					echo"<td> <button type='button' onclick='if (document.getElementById(\"tarif_reduit\").value > 0) {document.getElementById(\"tarif_reduit\").value--}'> - </button>\n";
 					echo "<input id='tarif_reduit' type='number' name='tarif_reduit' value='" . $tarif_reduit . "' min='0' required>\n";
-					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br>\n";
+					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br></td>\n";
+					echo "<td align='center'> 10 € </td></tr>\n";
 						
 					echo "<input name='spectacle' type='hidden' value='" . $spectacleText ."'>";
 					echo "<input name='is_modified' type='hidden' value='" . $is_modified ."'>"; //on envoie $is_modified en hidden: false=reservation normale, true=modification
 					
+
+
+					echo "</table>\n";
 					echo "<input type='submit' value='Réserver'>\n";
 					echo "</form>\n";
 				?>
