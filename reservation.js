@@ -36,7 +36,14 @@ function hiddenDDL2(){
 		if (ddlId == selectedTitre){
 			node.style.visibility = "visible";
 			node.style.height = "auto";
-			console.log(document.getElementById(i).options[this.selectedIndex].value);
+			if(typeof callCount == 'undefined'){
+				callCount = 0;
+			} else {
+				ddl = document.getElementById(i);
+				ddl.selectedIndex = 0;
+				selectSpec(ddl.options[ddl.selectedIndex].value);
+				callCount++;
+			}
 		} else {
 			node.style.visibility = "hidden";
 			node.style.height = "0";
@@ -55,6 +62,7 @@ function selectSpec(val){
 	document.getElementById("spectacle").value = val;
 	
 }
+
 
 function testJS(value){
 	document.getElementById("test").innerHTML = ""+value;
