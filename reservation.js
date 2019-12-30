@@ -36,6 +36,7 @@ function hiddenDDL2(){
 		if (ddlId == selectedTitre){
 			node.style.visibility = "visible";
 			node.style.height = "auto";
+			console.log(document.getElementById(i).options[this.selectedIndex].value);
 		} else {
 			node.style.visibility = "hidden";
 			node.style.height = "0";
@@ -48,6 +49,11 @@ function price(){
 	ta =document.getElementById("adulte").value;
 	te = document.getElementById("enfant").value;
 	tr = document.getElementById("tarif_reduit").value;
+}
+
+function selectSpec(val){
+	document.getElementById("spectacle").value = val;
+	
 }
 
 function testJS(value){

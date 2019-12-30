@@ -152,6 +152,7 @@
 						echo ">" . $i . "</option>\n";
 					}
 					echo "</select></br>\n";
+					$i=0;
 					foreach($titresSpectacles as $title => $representations){
 						echo "<div id='" . $title . "'>\n";
 						echo "<select ";
@@ -159,8 +160,8 @@
 						if(!compareHTML($spectacle['titre'], $title))
 							echo "hidden "; //conflict w/ javascript fun.
 						*/
-						echo "name='" . $title . "'>\n";
-						echo " <option disabled selected value> -- Veuillez sélectionner un spectacle -- </option>\n";
+						echo "id='" . $i++ . "' onchange='selectSpec(this.value)'>\n";
+						echo " <option selected disabled> -- Veuillez sélectionner un spectacle -- </option>\n";
 						foreach($representations as $rep){
 							$spectacleDDL = array( //pour Spectacle Drop Down List
 								"titre" => $title,
@@ -171,7 +172,8 @@
 								"ville" => $rep[4]
 							);
 							echo "<option value='" . serialize($spectacleDDL) . "'";// au milieu
-							if($rep[0] == $spectacleDDL['date'] && $rep[1] == $spectacleDDL['heure'] && $rep[3] == $spectacleDDL['lieu'] && $rep[5] == $spectacleDDL['troupe'])
+							//if($rep[0] == $spectacleDDL['date'] && $rep[1] == $spectacleDDL['heure'] && $rep[3] == $spectacleDDL['lieu'] && $rep[5] == $spectacleDDL['troupe'])
+							if ($spectacle['date'] == $spectacleDDL['date'] && $spectacle['heure'] == $spectacleDDL['heure'] && $spectacle['lieu'] == $spectacleDDL['lieu'] && $spectacle['troupe'] == $spectacleDDL['troupe'])	//revoir le if
 								echo " selected";
 							echo ">";
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
@@ -204,8 +206,8 @@
 					echo "<input id='tarif_reduit' type='number' name='tarif_reduit' value='" . $tarif_reduit . "' min='0' required>\n";
 					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br></td>\n";
 					echo "<td align='center'> 10 € </td></tr>\n";
+					echo "<input id='spectacle' name='spectacle' type='text' size='50' value='" . $spectacleText ."'>";
 						
-					echo "<input name='spectacle' type='hidden' value='" . $spectacleText ."'>";
 					echo "<input name='is_modified' type='hidden' value='" . $is_modified ."'>"; //on envoie $is_modified en hidden: false=reservation normale, true=modification
 					
 
