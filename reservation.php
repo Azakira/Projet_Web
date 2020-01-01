@@ -328,31 +328,36 @@
 					
 					$arrayDistTime = array();
 					foreach ($_SESSION['panier'] as $t => $com) {
-						echo "ok </br>";
-					if($arrayTestSpec["date"]==$com["spectacle"]["date"]){
-						$arrayDistTime = distVille($villeAsso,$arrayTestSpec["ville"],$com["spectacle"]["ville"],intval($arrayTestSpec["heure"]));
-						//var_dump(intval($arrayTestSpec["heure"]) +2+ mConvertH($arrayDistTime[1]));
-						//var_dump($arrayTestSpec["ville"]);
-						
-						$limitTime1 = intval($arrayTestSpec["heure"]) + 2  + mConvertH($arrayDistTime[1]);
-						$limitTime2 = intval($arrayTestSpec["heure"]) - 2  - mConvertH($arrayDistTime[1]);
+						if($arrayTestSpec["date"]==$com["spectacle"]["date"]){
+							$arrayDistTime = distVille($villeAsso,$arrayTestSpec["ville"],$com["spectacle"]["ville"],intval($arrayTestSpec["heure"]));
+							//var_dump(intval($arrayTestSpec["heure"]) +2+ mConvertH($arrayDistTime[1]));
+							//var_dump($arrayTestSpec["ville"]);
+							
+							$limitTime1 = intval($arrayTestSpec["heure"]) + 2  + mConvertH($arrayDistTime[1]);
+							$limitTime2 = intval($arrayTestSpec["heure"]) - 2  - mConvertH($arrayDistTime[1]);
 
-						// var_dump($limitTime);
-						// var_dump(intval($com["spectacle"]["heure"]));
-						if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"])){
-							if($limitTime1 > intval($com["spectacle"]["heure"])){
-								echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché NIBBA1');"."</script>";
-							}
-						} else{
-							if($limitTime2 < intval($com["spectacle"]["heure"])){
-								echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi NIBBA2');"."</script>";
+							// var_dump($limitTime);
+							// var_dump(intval($com["spectacle"]["heure"]));
+
+							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"]){
+								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier NIBBA0');"."</script>";
+
+							}else{
+
+								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"])){
+									if($limitTime1 > intval($com["spectacle"]["heure"])){
+										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché NIBBA1');"."</script>";
+									}
+								} else{
+									if($limitTime2 < intval($com["spectacle"]["heure"])){
+										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi NIBBA2');"."</script>";
+									}
+								}
+							echo "</br>";
 							}
 						}
-						echo "</br>";
-						}
-					}
  				
-						
+					}	
 					
 					//var_dump($_SESSION['panier']);
 				?>
