@@ -91,7 +91,7 @@
 						foreach($_SESSION['panier'] as $commande){
 							
 							echo "<div class=\"Spectacle\">";	
-							echo "\n<titreSpectacle>" . $commande['spectacle']['titre'] . "</titreSpectacle>, le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . "</br>\n";
+							echo "\n<titreSpectacle>" . $commande['spectacle']['titre'] . "</titreSpectacle>, le " . $commande['spectacle']['date'] . " à " . $commande['spectacle']['heure'] . " dans la ville de " . $commande['spectacle']['ville'] . "</br>\n";
 							
 							if($commande['adulte'] > 0)
 								echo "" . "Tickets adulte: " . $commande['adulte'] . "</br>\n";
@@ -117,7 +117,9 @@
 							echo "</form>\n";
 							echo "</div><!--class=\"Spectacle\"-->";
 							//regarder la diff entre submit et value pour le type
+
 						}
+
 						
 					?>
 				</div><!--class="decalage"-->

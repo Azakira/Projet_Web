@@ -57,6 +57,97 @@
 			}
 		}
 	}
+
+
+
+	if(($handle = fopen("distanceVille.csv", "r")) !== FALSE) {
+		fgetcsv($handle, 1000, ",");
+			$tab = array();
+			while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+							
+				foreach($data as $value) {
+	        		$fields = preg_split("[,]", $value);
+	        		array_push($tab, $fields);
+	        	}
+
+			}
+			
+    	fclose($handle);
+	}
+
+
+	$villeAsso = array();
+
+	$indVille="";
+	foreach ($tab as $line) {
+		if($indVille!=$line[0]){
+			$indVille=$line[0];
+			$villeAsso[$indVille] = $line;
+		}
+
+	}
+
+	function distVille($tableau,$ville1,$ville2,$horaire){
+		$distTime = array();
+		$ind = -1;
+		$cpt =1;
+		switch ($ville1) {
+			case 'Monétay sur Allier':
+				$ville1 = "Monétay";
+				break;
+			case 'Monteignet sur l’Andelot':
+				$ville1 = "Monteignet";
+				break;			
+		}
+
+		switch ($ville2) {
+			case 'Monétay sur Allier':
+				$ville2 = "Monétay";
+				break;
+			case 'Monteignet sur l’Andelot':
+				$ville2 = "Monteignet";
+				break;
+		}	
+
+		foreach($tableau as $keyVille => $value1){
+			if($keyVille == $ville1){
+
+				$ind = $cpt;
+				break 1;
+
+			}else{ $cpt++; }
+
+		}
+		if($ind == -1){
+			echo "La ville de votre 1er spectacle n'existe pas,veuillez rééssayer pls ";
+		}
+
+		else {
+			$cpt2=1;
+			$ind2=-1;
+			foreach($tableau as $keyVille2 => $value2){
+				if($keyVille2 == $ville2){
+					 $ind2 = $cpt2;
+					//return $tableau[$ville1][$ind2];
+					$timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
+					$timeAndDistance[0]= intval($timeAndDistance[0]);
+					$timeAndDistance[1]= intval($timeAndDistance[1]);
+					$time=intval($timeAndDistance[1]);
+					if($horaire >=17 and $horaire <=19)
+						$timeAndDistance[1]+=$timeAndDistance[1]*0.1;
+
+				}
+				else{ $cpt2++; }
+			}
+
+			if($ind2 == -1){
+				echo "La ville du 2eme spectacle n'existe pas,veuillez rééssayer pls ";
+			}
+		}
+		return $timeAndDistance;
+
+	}		
+		
 	
 	//code déplacé en haut pour pouvoir utilisé header(), devant être appelée avant tt affichage html
 	
@@ -171,20 +262,28 @@
 								"troupe"=> $rep[5],
 								"ville" => $rep[4]
 							);
-							echo "<!--" . serialize($spectacleDDL). " || " . $spectacleText . " -->";
+							
 							echo "<option value='" . serialize($spectacleDDL) . "'";// au milieu
 							//if($rep[0] == $spectacleDDL['date'] && $rep[1] == $spectacleDDL['heure'] && $rep[3] == $spectacleDDL['lieu'] && $rep[5] == $spectacleDDL['troupe'])
 						if (compareHTML($spectacle['titre'], $spectacleDDL['titre']) 
 							&& compareHTML($spectacle['date'], $spectacleDDL['date']) 
 							&& compareHTML($spectacle['heure'], $spectacleDDL['heure']) 
 							&& compareHTML($spectacle['lieu'], $spectacleDDL['lieu']))
-								echo " selected";
+						
+							echo " selected";
 							echo ">";
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
 							echo "</option>\n";
+							echo "<!--" . serialize($spectacleDDL). " || " . $spectacleText . " -->";
+							//distVille($villeAsso,$rep[4])
 						}
 						echo "</select>\n</div><!--id=\"" . $title . "\"-->\n";
+
+
+						
+						
 					}
+
 
 					echo "<form action='panier.php' method='POST'>\n";
 					
@@ -211,6 +310,7 @@
 					echo "<button type='button' onclick='document.getElementById(\"tarif_reduit\").value++'> + </button></br></td>\n";
 					echo "<td align='center'> 10 € </td></tr>\n";
 					echo "<input required id='spectacle' name='spectacle' type='text' size='100' value='" . $spectacleText ."'>";
+					 // le pb avec spectacleText est si le client réserve un spectacle d'une page qquonque mais décide de modifié et prends Barbara ou Tratuffe au moment de réserver, on n'envoie rien au panier
 						
 					echo "<input name='is_modified' type='hidden' value='" . $is_modified ."'>"; //on envoie $is_modified en hidden: false=reservation normale, true=modification
 					
@@ -219,6 +319,28 @@
 					echo "</table>\n";
 					echo "<input type='submit' value='Réserver'>\n";
 					echo "</form>\n";
+					
+					$arrayTestSpec = unserialize($spectacleText);
+					
+					//  var_dump($arrayTestSpec["ville"]);
+					//  var_dump(intval($arrayTestSpec["heure"]));
+
+					$arrayDistTime = array();
+					foreach ($_SESSION['panier'] as $t => $com) {
+						echo "ok </br>";
+					if($arrayTestSpec["date"]==$com["spectacle"]["date"]){
+						$arrayDistTime = distVille($villeAsso,$arrayTestSpec["ville"],$com["spectacle"]["ville"],intval($arrayTestSpec["heure"]));
+						//var_dump($com["spectacle"]["ville"]);
+						//var_dump($arrayTestSpec["ville"]);
+						echo "</br>";
+						var_dump($arrayDistTime[0]);
+						var_dump($arrayDistTime[1]);
+						}
+					}
+ 
+						
+					
+					//var_dump($_SESSION['panier']);
 				?>
 			</div><!--class=\"decalage\"-->
 		</main>
