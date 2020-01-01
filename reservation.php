@@ -148,6 +148,10 @@
 
 	}		
 		
+	function mConvertH($time){
+		return round($time/60,1); 
+	}
+
 	
 	//code déplacé en haut pour pouvoir utilisé header(), devant être appelée avant tt affichage html
 	
@@ -322,22 +326,32 @@
 					
 					$arrayTestSpec = unserialize($spectacleText);
 					
-					//  var_dump($arrayTestSpec["ville"]);
-					//  var_dump(intval($arrayTestSpec["heure"]));
-
 					$arrayDistTime = array();
 					foreach ($_SESSION['panier'] as $t => $com) {
 						echo "ok </br>";
 					if($arrayTestSpec["date"]==$com["spectacle"]["date"]){
 						$arrayDistTime = distVille($villeAsso,$arrayTestSpec["ville"],$com["spectacle"]["ville"],intval($arrayTestSpec["heure"]));
-						//var_dump($com["spectacle"]["ville"]);
+						//var_dump(intval($arrayTestSpec["heure"]) +2+ mConvertH($arrayDistTime[1]));
 						//var_dump($arrayTestSpec["ville"]);
+						
+						$limitTime1 = intval($arrayTestSpec["heure"]) + 2  + mConvertH($arrayDistTime[1]);
+						$limitTime2 = intval($arrayTestSpec["heure"]) - 2  - mConvertH($arrayDistTime[1]);
+
+						// var_dump($limitTime);
+						// var_dump(intval($com["spectacle"]["heure"]));
+						if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"])){
+							if($limitTime1 > intval($com["spectacle"]["heure"])){
+								echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché NIBBA1');"."</script>";
+							}
+						} else{
+							if($limitTime2 < intval($com["spectacle"]["heure"])){
+								echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi NIBBA2');"."</script>";
+							}
+						}
 						echo "</br>";
-						var_dump($arrayDistTime[0]);
-						var_dump($arrayDistTime[1]);
 						}
 					}
- 
+ 				
 						
 					
 					//var_dump($_SESSION['panier']);
