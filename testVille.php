@@ -53,7 +53,23 @@
 			$distTime = array();
 			$ind = -1;
 			$cpt =1;
+		switch ($ville1) {
+			case 'Monétay sur Allier':
+				$ville1 = "Monétay";
+				break;
+			case 'Monteignet sur l’Andelot':
+				$ville1 = "Monteignet";
+				break;			
+		}
 
+		switch ($ville2) {
+			case 'Monétay sur Allier':
+				$ville2 = "Monétay";
+				break;
+			case 'Monteignet sur l’Andelot':
+				$ville2 = "Monteignet";
+				break;
+		}
 			foreach($tableau as $keyVille => $value1){
 				if($keyVille == $ville1){
 
@@ -92,7 +108,8 @@
 			return $timeAndDistance;
 
 		}
-			distVille($villeAsso,"Monteignet","Clermont-Ferrand",18);
+			var_dump(distVille($villeAsso,"Monteignet sur l’Andelot","Clermont-Ferrand",18));
+			//var_dump($fun)
 
 
 ?>

@@ -102,7 +102,7 @@
 							echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
 							echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
 							echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
-							echo "<input name='ville' type=hidden value=\"" . $fields[4] . "\">\n";
+							echo "<input name='ville' type=hidden value=\"" . $line[4] . "\">\n";
 							echo "<input name='troupe' type=hidden value=\"" . $line[5] . "\">\n";
 							echo "\n</form> \n</td> \n</tr>\n";
 						}
