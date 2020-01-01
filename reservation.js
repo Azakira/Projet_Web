@@ -54,7 +54,6 @@ function hiddenDDL2(){
 
 
 function selectSpec(val){
-	console.log(val);
 	document.getElementById("spectacle").value = val;
 	
 }

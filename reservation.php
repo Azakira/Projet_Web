@@ -259,22 +259,22 @@
 						echo " <option selected disabled value=''> -- Veuillez sélectionner un spectacle -- </option>\n";
 						foreach($representations as $rep){
 							$spectacleDDL = array( //pour Spectacle Drop Down List
-								"titre" => $title,
-								"date"  => $rep[0],
-								"heure" => $rep[1],
-								"lieu"  => $rep[3],
-								"troupe"=> $rep[5],
-								"ville" => $rep[4]
+								"titre" => html_entity_decode($title),
+								"date"  => html_entity_decode($rep[0]),
+								"heure" => html_entity_decode($rep[1]),
+								"lieu"  => html_entity_decode($rep[3]),
+								"troupe"=> html_entity_decode($rep[5]),
+								"ville" => html_entity_decode($rep[4])
 							);
 							
 							echo "<option value='" . serialize($spectacleDDL) . "'";// au milieu
 							//if($rep[0] == $spectacleDDL['date'] && $rep[1] == $spectacleDDL['heure'] && $rep[3] == $spectacleDDL['lieu'] && $rep[5] == $spectacleDDL['troupe'])
-						if (compareHTML($spectacle['titre'], $spectacleDDL['titre']) 
-							&& compareHTML($spectacle['date'], $spectacleDDL['date']) 
-							&& compareHTML($spectacle['heure'], $spectacleDDL['heure']) 
-							&& compareHTML($spectacle['lieu'], $spectacleDDL['lieu']))
-						
+						if (   $spectacle['titre'] 	== $spectacleDDL['titre']
+							&& $spectacle['date'] 	== $spectacleDDL['date'] 
+							&& $spectacle['heure'] 	== $spectacleDDL['heure'] 
+							&& $spectacle['lieu']	== $spectacleDDL['lieu'])
 							echo " selected";
+							
 							echo ">";
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
 							echo "</option>\n";
