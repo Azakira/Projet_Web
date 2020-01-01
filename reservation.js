@@ -59,8 +59,16 @@ function price(){
 }
 
 function selectSpec(val){
+	console.log(val);
 	document.getElementById("spectacle").value = val;
 	
+}
+
+function hideSpec(){
+	// console.log("je suis appelé 2");
+	// node = document.getElementById("spectacle");
+	// node.style.visibility = "hidden";
+	// node.style.height = "0";
 }
 
 

@@ -100,7 +100,7 @@
 		<script src="reservation.js"></script>
 	</head>
 	
-	<body onload="hiddenDDL2()">
+	<body onload="hiddenDDL2(); hideSpec()">
 		<div class="bandeau">
 			<h1> Festival Théâtres de Bourbon : Réservation</h1>
 		</div ><!--class="bandeau"-->
@@ -121,7 +121,7 @@
 		
 				<?php
 					function compareHTML($str1, $str2){
-						$str1 = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
+						$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
 							function ($match){
 								$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
 								$match = preg_replace("[’]", '&#146;', $match); //remplace les apostrophes par le symbole html
@@ -130,7 +130,7 @@
 							},
 							$str1
 						);
-						if($str1 == $str2)
+						if($res == $str2)
 							return true;
 						return false;
 					}
