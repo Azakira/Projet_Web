@@ -215,20 +215,26 @@
 				<br/>
 		
 				<?php
-					function compareHTML($str1, $str2){
+					function convertHTML($str){
 						$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
 							function ($match){
-								$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
-								$match = preg_replace("[’]", '&#146;', $match); //remplace les apostrophes par le symbole html
+								$match = preg_replace("[&#44;]", ',', $match); //remplace les virgules par le symbole html
+								$match = preg_replace("[&#146;]", "’", $match); //remplace les apostrophes par le symbole html
 								implode($match); //concatene le tout
 								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 							},
-							$str1
+							$str
 						);
-						if($res == $str2)
+						return $res;
+					}
+					
+					function compareHTML($str1, $str2){
+						$res = convertHTML($str2);
+						if($res == $str1)
 							return true;
 						return false;
 					}
+					
 					
 					/**
 					 *	TESTS
@@ -259,12 +265,12 @@
 						echo " <option selected disabled value=''> -- Veuillez sélectionner un spectacle -- </option>\n";
 						foreach($representations as $rep){
 							$spectacleDDL = array( //pour Spectacle Drop Down List
-								"titre" => html_entity_decode($title),
-								"date"  => html_entity_decode($rep[0]),
-								"heure" => html_entity_decode($rep[1]),
-								"lieu"  => html_entity_decode($rep[3]),
-								"troupe"=> html_entity_decode($rep[5]),
-								"ville" => html_entity_decode($rep[4])
+								"titre" => convertHTML($title),
+								"date"  => convertHTML($rep[0]),
+								"heure" => convertHTML($rep[1]),
+								"lieu"  => convertHTML($rep[3]),
+								"troupe"=> convertHTML($rep[5]),
+								"ville" => convertHTML($rep[4])
 							);
 							
 							echo "<option value='" . serialize($spectacleDDL) . "'";// au milieu
@@ -276,16 +282,16 @@
 							echo " selected";
 							
 							echo ">";
+							
+							// echo "<!-- " . $spectacle['lieu'] . " | " . $spectacleDDL['lieu'] . "-->";
+							//echo "<!-- " . (($spectacle['lieu']==$spectacleDDL['lieu']) ? "true" : "false") . " -->";
+							
 							echo "Le " . $rep[0] . " " . " à " . $rep[1] . ", " . "au " . $rep[3] . " à " . $rep[4] . ", par " . $rep[5] . "<br/>\n";
 							echo "</option>\n";
-							echo "<!--" . serialize($spectacleDDL). " || " . $spectacleText . " -->";
+							// echo "<!--" . serialize($spectacleDDL). " || " . $spectacleText . " -->";
 							//distVille($villeAsso,$rep[4])
 						}
 						echo "</select>\n</div><!--id=\"" . $title . "\"-->\n";
-
-
-						
-						
 					}
 
 
