@@ -345,17 +345,17 @@
 							// var_dump($limitTime);
 							// var_dump(intval($com["spectacle"]["heure"]));
 
-							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"]){
+							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"] && is_null($_POST['modify'])){
 								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier NIBBA0');"."</script>";
 
 							}else{
 
-								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"])){
+								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"]) && is_null($_POST['modify'])){
 									if($limitTime1 > intval($com["spectacle"]["heure"])){
 										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché NIBBA1');"."</script>";
 									}
 								} else{
-									if($limitTime2 < intval($com["spectacle"]["heure"])){
+									if($limitTime2 < intval($com["spectacle"]["heure"])&& is_null($_POST['modify'])){
 										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi NIBBA2');"."</script>";
 									}
 								}
@@ -365,7 +365,9 @@
  				
 					}	
 					
-					//var_dump($_SESSION['panier']);
+					// foreach ($_SESSION['panier'] as $i => $co) {
+					// 	if(sizeof($_SESSION['panier']))
+					// }
 				?>
 			</div><!--class=\"decalage\"-->
 		</main>
