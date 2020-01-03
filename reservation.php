@@ -364,10 +364,15 @@
 						}
  				
 					}	
+					$nbPlace=0;
+					$tr=0;
+					foreach ($_SESSION['panier'] as $co) {
+						$nbPlace += intval($co['adulte']) + intval($co['enfant']) + intval($co['tarif_reduit']);
+						if(intval($co['tarif_reduit'])!=0)
+							$tr++;
+
+				}
 					
-					// foreach ($_SESSION['panier'] as $i => $co) {
-					// 	if(sizeof($_SESSION['panier']))
-					// }
 				?>
 			</div><!--class=\"decalage\"-->
 		</main>

@@ -86,6 +86,7 @@
 						echo "<input name='reset' type='hidden' value='true'>\n";
 						echo "<input type=submit value='Réinitialiser'>\n</form></br>\n";
 						
+						$tr=0;
 						$nbPlaces =0;
 						$prix = 0;
 						foreach($_SESSION['panier'] as $commande){
@@ -100,12 +101,12 @@
 							if($commande['tarif_reduit'] > 0)
 								echo " Tickets à tarif réduit: " . $commande['tarif_reduit'] . "</br>\n";
 
-							$nbPlaces = intval($commande['adulte']) + intval($commande['enfant']) + intval($commande['tarif_reduit']);
-							$prix = intval($commande['adulte'])*15 + intval($commande['tarif_reduit'])*10 + intval($commande['enfant'])*0;
+							$nbPlaces += intval($commande['adulte']) + intval($commande['enfant']) + intval($commande['tarif_reduit']);
+							$prix += intval($commande['adulte'])*15 + intval($commande['tarif_reduit'])*10 + intval($commande['enfant'])*0;
 
-							echo "<div class=\"petitPanier\"> <table> PANIER </br> Nombre places réservées : ". $nbPlaces /*+ intval($commande['enfant']) + intval($commande['tarif_reduit'])*/. "</br> Prix total : " . $prix . "</table>
-								</div><!-- class=\"petitPanier\"-->";	
-								//var_dump(intval($commande['adulte']) + intval($commande['enfant']));							
+								//var_dump(intval($commande['adulte']) + intval($commande['enfant']));	
+							if(intval($commande['tarif_reduit'])!=0)
+								$tr++;						
 							
 							echo "<form method=\"post\" action=\"reservation.php\">\n";
 							echo "<input name='modify' type='hidden' value='" . serialize($commande) . "'>\n";
@@ -119,8 +120,23 @@
 							//regarder la diff entre submit et value pour le type
 
 						}
-
-						
+						// var_dump($nbPlaces);
+						// var_dump($prix);
+						if($nbPlaces<=5){
+							echo "Vous pouvez choisir un 6ème spectacle IL VOUS EST OFFERT (Attention tarif le plus bas prix en compte)";
+						}
+						else{
+							switch ($tr) {
+								case 0:
+									$prix -= 15;
+									break;
+								default:
+									$prix -= 10;
+									break;			
+							}
+						}
+						echo "<div class=\"petitPanier\"> <table> PANIER </br> Nombre places réservées : ". $nbPlaces . "</br> Prix total : " . $prix . "</table>
+						</div><!-- class=\"petitPanier\"-->";					
 					?>
 				</div><!--class="decalage"-->
 			</section>
