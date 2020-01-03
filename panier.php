@@ -40,7 +40,16 @@
 		<main>
 			<section>
 				<div class="decalage">
+
 					<?php 
+
+
+						function naturalN($valeur){
+							if($valeur<0)
+								return 0;
+							else
+								return $valeur;
+						}
 						if (isset($_POST['spectacle'])){
 							$commande = array(
 								"spectacle"   => unserialize($_POST['spectacle']),
@@ -135,7 +144,7 @@
 									break;			
 							}
 						}
-						echo "<div class=\"petitPanier\"> <table> PANIER </br> Nombre places réservées : ". $nbPlaces . "</br> Prix total : " . $prix . "</table>
+						echo "<div class=\"petitPanier\"> <table> PANIER </br> Nombre places réservées : ". $nbPlaces . "</br> Prix total : " . naturalN($prix) . "</table>
 						</div><!-- class=\"petitPanier\"-->";					
 					?>
 				</div><!--class="decalage"-->
