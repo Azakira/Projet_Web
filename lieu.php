@@ -18,7 +18,6 @@
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>
-				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>	
 				<li><a href="spectacle.php">Spectacles</a></li>
@@ -102,7 +101,7 @@
 							echo "<input name='date' type=hidden value=\"" . $line[0] . "\">\n";
 							echo "<input name='heure' type=hidden value=\"" . $line[1] . "\">\n";
 							echo "<input name='lieu' type=hidden value=\"" . $line[3] . "\">\n";
-							echo "<input name='ville' type=hidden value=\"" . $line[4] . "\">\n";
+							echo "<input name='ville' type=hidden value=\"" . $line[4] . "\">\n"; 
 							echo "<input name='troupe' type=hidden value=\"" . $line[5] . "\">\n";
 							echo "\n</form> \n</td> \n</tr>\n";
 						}

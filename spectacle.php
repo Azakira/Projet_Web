@@ -17,7 +17,6 @@
 		<div class="menu">
 			<ul class="nav">
 				<a href="index.php">Le site :</a>
-				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
