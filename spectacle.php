@@ -6,14 +6,15 @@
 	</head>
 	
 	<body>
-		<div class="bandeau">	
-			<div class="petitPanier">
-				<table>Billets en vente exclusivement sur les lieux du festival: Monétay,Monteignet, Veauce  du 2 au 6 août dès 11h00 et le 6 août à Moulins de 19h00 à 20h00.
-					Attention! à Moulins le début du spectacle à 20h00.
-				</table>
-			</div><!-- class="petitPanier"-->					
+		<div class="bandeau">				
 			<h1> Festival Théâtres de Bourbon : Spectacle par spectacle </h1>
 		</div ><!--class="bandeau"-->
+
+		<div class="panierFinal">
+				<figure> <a href="panier.php"><img src="panier.jpg" alt="imgPanier" width=100% height=100%></a>
+					<figcaption>Panier</figcaption>
+				</figure>
+		</div><!-- class="panierFinal"-->	
 		<div class="menu">
 			<ul class="nav">
 				<a href="index.php">Le site :</a>

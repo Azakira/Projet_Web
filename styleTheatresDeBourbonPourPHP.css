@@ -384,6 +384,35 @@ td {
 	/*text-orientation:sideways;*/
 	text-align:left;
 }
+
+
+.proseTarif{
+	/*border:1px solid white;*/
+	background:#077bd2;
+	border-radius:2em;
+	text-align: justify;
+	padding: 1em 1em 1em 1em;
+	margin-top:2e100
+	margin-bottom:2em;
+    background-color :#305370; /*bronze*/
+}
+
+.panierFinal{
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	right:10px;
+	top:-26px;
+	background-color :#305370;
+/*	font-family:"font-panier2";
+	font-size: 20px;*/
+	text-align: center;
+}
+
+@font-face{ 	
+	font-family: "font-panier"; 	src: url('Montserrat-SemiBold.ttf'); 
+	font-family: "font-panier2"; 	src: url('Montserrat-BlackItalic.ttf'); 
+}
 /*******************************   Gestion des petits carrés... *****************************/	
 .emballage {
     float:left;   /*width:12,5%;*/
