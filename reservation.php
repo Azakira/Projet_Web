@@ -187,11 +187,6 @@
 		<title>Festival Théâtres de Bourbon : Réservation</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
-		<style> th {
-					  background-color: #4CAF50;
-					  color: white;
-					}
-		</style>
 		<script src="reservation.js"></script>
 	</head>
 	
@@ -199,6 +194,13 @@
 		<div class="bandeau">
 			<h1> Festival Théâtres de Bourbon : Réservation</h1>
 		</div ><!--class="bandeau"-->
+
+		<div class="panierFinal">
+				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
+				</br>
+				<span>Panier</span>
+		</div><!-- class="panierFinal"-->		
+		
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>
@@ -374,7 +376,7 @@
 				
 					
 				?>
-									<section class="proseTarif">
+					<section class="proseTarif">
 						<section><!-- Présentation des tarifs -->
 
 							<h1 id="label_Prose">Notre PROSE tarifaire</h1>
@@ -513,7 +515,7 @@
 						</section><!-- Explication des tarifs -->
 
 					</section><!--section class="proseTarif"-->	
-						
+
 			</div><!--class=\"decalage\"-->
 		</main>
 		

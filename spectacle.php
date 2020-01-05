@@ -11,9 +11,10 @@
 		</div ><!--class="bandeau"-->
 
 		<div class="panierFinal">
-				<figure> <a href="panier.php"><img src="panier.jpg" alt="imgPanier" width=100% height=100%></a>
-					<figcaption>Panier</figcaption>
-				</figure>
+				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
+				</br>
+				<span>Panier</span>
+
 		</div><!-- class="panierFinal"-->	
 		<div class="menu">
 			<ul class="nav">

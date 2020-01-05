@@ -9,12 +9,13 @@
 		<div class="bandeau">						
 			<h1> Festival Théâtres de Bourbon : jour après jour </h1>
 		</div ><!--class="bandeau"-->
-		
-		<div class="panierFinal">
-				<a href="panier.php"><img src="panier.jpg" alt="imgPanier" width=100% height=100%></a>
-				<span>Panier</span>
 
-		</div><!-- class="panierFinal"-->		
+		<div class="panierFinal">
+				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
+				</br>
+				<span>Panier</span>
+		</div><!-- class="panierFinal"-->	
+
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>
