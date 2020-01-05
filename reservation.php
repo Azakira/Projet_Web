@@ -188,6 +188,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
 		<script src="reservation.js"></script>
+		<!--Fancybox-->
+        <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        <script type="text/javascript" src="fancybox/jquery.easing.1.4.1.js"></script>    
+        <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />  
+
 	</head>
 	
 	<body onload="hiddenDDL2(); hideSpec()">
@@ -200,7 +205,7 @@
 				</br>
 				<span>Panier</span>
 		</div><!-- class="panierFinal"-->		
-		
+
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>
