@@ -306,7 +306,7 @@
 					}
 
 
-					echo "<form action='panier.php' method='POST'>\n";
+					echo "<form id='panier' action='panier.php' method='POST'>\n";
 					
 					echo "<table><thead><tr> <th>Type de place</th>\n <th>nb de places</th>\n <th>Prix Unitaire</th><tr></thead>\n"; 
 
@@ -338,8 +338,10 @@
 
 
 					echo "</table>\n";
-					echo "<input type='submit' value='Réserver'>\n";
+					echo "<input type='submit' type='hidden' value='Réserver'>\n";
 					echo "</form>\n";
+
+
 					
 					$arrayTestSpec = unserialize($spectacleText);
 					
@@ -386,6 +388,21 @@
 				
 					
 				?>
+				<script type="text/javascript">
+					    $(function() {
+					 
+					      $('#fermer').click(function(){
+					             $.ajax({
+					        type: "POST",
+					        url: "panier.php",
+					                success : parent.jQuery.fancybox.close()
+					    });
+					               
+					          });
+					           
+					            
+					    });
+					</script>
 					<section class="proseTarif">
 						<section><!-- Présentation des tarifs -->
 
