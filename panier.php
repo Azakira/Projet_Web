@@ -91,10 +91,15 @@
 						}
 						
 						
-						echo "<form action='panier.php' method='post'>\n";
+						echo "<form action='panier.php' method='post' style='display:inline'>\n";
+						echo "<div class='Spectacle'>\n";
 						echo "<input name='reset' type='hidden' value='true'>\n";
-						echo "<input type=submit value='Réinitialiser'>\n</form></br>\n";
+						echo "<input type=submit value='Réinitialiser'>\n</form>\n";
 						
+						echo "<form action='payement.php' method='post' style='display:inline'>\n";
+						echo "<input name='pay' type='hidden' value='true'>\n";
+						echo "<input type=submit value='Payer'>\n</form>\n";
+						echo "</div><!--class=\"Spectacle\"--></br>\n";
 						$tr=0;
 						$nbPlaces =0;
 						$prix = 0;
