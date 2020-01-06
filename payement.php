@@ -1,67 +1,87 @@
-
-
 <?php 
-	//header("Content-type: text/javascript");
+	session_start();
 
-		// $specCSV = csvSpectacle();
-		// echo json_encode($specCSV);
-
-
-			function csvSpectacle(){
-					/*CODE A METTRE DANS LE PANIER APRES CONFIRMATION DU PAYEMENT*/
-					if (($handle = fopen("ResultatsFestival2.csv", "r")) !== FALSE) { //r+ -> lecture et ecriture
-							fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
-							$tab = array();
-							while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
-								$line = array();				
-								foreach($data as $value){
-									$value = preg_replace_callback(
-										'/"(\\\\[\\\\"]|[^\\\\"])*"/',
-										function ($match){
-											$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
-											$match = preg_replace("[\"]", '', $match); //retire les guillemets
-											implode($match); //concatene le tout
-											return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
-										},
-										$value
-									);
-									
-									$value = preg_replace("[']", '&#146;', $value); //remplace les apostrophes par le symbole html
-									$fields = preg_split("[,]", $value);
-									array_push($tab, $fields);
-								}
-								//array_push($tab, $line);
-								//fputcsv($handle, $data); //et on les remet dans le csv
-							}
-						fclose($handle);
-
-					}
-
-						$specTab = array();
-
-						foreach ($tab as $line){
-									if(empty($specTab[$line[2]])){
-
-										 $specTab[$line[2]] = array ( "P" => intval($line[6]), "R" => intval($line[7]), "O" => intval($line[8]), "SJ" => intval($line[9]), "SA" => intval($line[10]), "E" => intval($line[11]), "Recette" => (($line[6]*15 + $line[7]*10)*0.1), "Depenses" => ($line[9]*12.5 + $line[10]*9));
-            
-       								} else{    
-								        
-								        $add = array ("P" => $line[6] + $specTab[$line[2]]["P"], 
-													  "R" => $line[7] + $specTab[$line[2]]["R"], 
-													  "O" => $line[8] + $specTab[$line[2]]["O"], 
-													  "SJ" => $line[9] + $specTab[$line[2]]["SJ"], 
-													  "SA" => $line[10] + $tableau[$line[2]]["SA"], 
-													  "E" => $line[11] + $tableau[$line[2]]["E"], 
-													  "Recette" => (($line[6]*15 + $line[7]*10)*0.1) + $specTab[$line[2]]["Recette"], 
-													  "Depenses" => (($line[9])*12.5 + ($line[10])*9) + $specTab[$line[2]]["Depenses"]);
-								        $specTab[$line[2]]= $add;
-								    }      
-						}
-						
-						return $specTab;
-				}
+	if(!isset($_POST['pay']) || !isset($_SESSION['panier']) || empty($_SESSION['panier'])){
+		//erreur: on arrive de nulle part OU panier vide / non initialisé
+		header('Location: http://localhost/Projet_Web/panier.php');
+		exit();
+	}
+	$handle = fopen("ResultatsFestival.csv", "r") or die('Fichier inexistant');
+	$firstline = fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
+	$tab = array();
+	while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+		$line = array();				
+		foreach($data as $value){
+			$value = preg_replace_callback(
+				'/"(\\\\[\\\\"]|[^\\\\"])*"/',
+				function ($match){
+					$match = preg_replace("[,]", '&#44;', $match); //remplace les virgules par le symbole html
+					$match = preg_replace("[\"]", '', $match); //retire les guillemets
+					implode($match); //concatene le tout
+					return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+				},
+				$value
+			);
+			
+			$value = preg_replace("[']", '&#146;', $value); //remplace les apostrophes par le symbole html
+			$fields = preg_split("[,]", $value);
+			array_push($tab, $fields);
+		}
+		//array_push($tab, $line);
+	}
+	fclose($handle);
+	
+	function convertHTML($str){
+		$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
+			function ($match){
+				$match = preg_replace("[&#44;]", ',', $match);
+				$match = preg_replace("[&#146;]", "’", $match);
+				implode($match); //concatene le tout
+				return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+			},
+			$str
+		);
+		return $res;
+	}
+	//modification des données avec le contenu du panier
+	foreach($_SESSION['panier'] as $i => $com){
+		foreach($tab as $j => $line){
+			if (   $com['spectacle']['titre']  == convertHTML($line[2])
+				&& $com['spectacle']['date']   == convertHTML($line[0])
+				&& $com['spectacle']['heure']  == convertHTML($line[1])
+				&& $com['spectacle']['lieu']   == convertHTML($line[3])
+				&& $com['spectacle']['troupe'] == convertHTML($line[5])
+				&& $com['spectacle']['ville']  == convertHTML($line[4])
+			){
+				$tab[$j][6] += $com['adulte']; //adulte
+				$tab[$j][7] += $com['tarif_reduit']; //reduit
+				// $tab[$j][8] += $com['offert']; //offert
+				// $tab[$j][9] += ...//sj
+				// $tab[$j][10] += ...//sa
+				$tab[$j][11] += $com['enfant'];//enfant
+			}
+			
+		}
+	}
+	
+	//On remet les données modifiées dans le csv
+	$handle2 = fopen("ResultatsFestival.csv", "w") or die('Veuillez fermer le .csv'); //!\NE MARCHE PAS SI LE CSV EST OUVERT
+	
+	foreach($tab as $i => $line){
+		foreach($line as $j => $value){
+			$tab[$i][$j] = convertHTML($value);
+		}
+	}
+	
+	fputcsv($handle2, $firstline,',');
+	foreach($tab as $line){
+		fputs($handle2, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+		fputcsv($handle2, $line,',');
+	}
+	
+	
 					
-				?>
+?>
 
 
 <html>
@@ -69,8 +89,8 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
-		<?php
-		var_dump(csvSpectacle());
+		<?php			
+			print_r($tab);
 		?>
 	</body>
 </html>

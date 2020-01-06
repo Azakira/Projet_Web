@@ -225,8 +225,8 @@
 					function convertHTML($str){
 						$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
 							function ($match){
-								$match = preg_replace("[&#44;]", ',', $match); //remplace les virgules par le symbole html
-								$match = preg_replace("[&#146;]", "’", $match); //remplace les apostrophes par le symbole html
+								$match = preg_replace("[&#44;]", ',', $match);
+								$match = preg_replace("[&#146;]", "’", $match);
 								implode($match); //concatene le tout
 								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
 							},
