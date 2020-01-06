@@ -33,7 +33,7 @@
 								//array_push($tab, $line);
 								//fputcsv($handle, $data); //et on les remet dans le csv
 							}
-						fclose($handle);
+						
 
 					}
 
@@ -57,20 +57,8 @@
 								        $specTab[$line[2]]= $add;
 								    }      
 						}
-						
+						fclose($handle);
 						return $specTab;
 				}
 					
 				?>
-
-
-<html>
-	<head>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<?php
-		var_dump(csvSpectacle());
-		?>
-	</body>
-</html>

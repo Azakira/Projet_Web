@@ -1,22 +1,25 @@
 window.onload = function () {
 
-	getSpec();
 
-	setTimeout(function () { 
+getTabs();
+
+    setTimeout(function () { 
 
 	var chart = new CanvasJS.Chart("chartContainer", {
-		animationEnabled: true,
-		title: {},
-		toolTip: {
+			animationEnabled: true,
+			title: {},
+			
+			toolTip: {
 				shared: true
-		},	
-	});
-	//canvasTarifPlein();
-	//canvasOffert();
-	canvasTarifReduit();
-	chart.render();
-
- 	function popUpPT(e){
+			},
+		});
+	
+		PleinTarifCanvas()
+		chart.render();
+				
+				
+			
+	function popUpPT(e){
 	
 		var  str = "<span style= \"color:"+e.entries[0].dataSeries.color + "\"> "+e.entries[0].dataSeries.name+"</span> : <strong>"+e.entries[0].dataPoint.y+"</strong> places<br/>";
 		total = totPT(e.entries[0].dataPoint.y);
@@ -80,7 +83,7 @@ window.onload = function () {
 	}
 
 
-	//calcul gain de l'organisateur
+//CALCUL DES GAINS ET DEPENSES D'UN SPECTACLE
 	function totPT(nbBillets){
 	
 		return nbBillets*15*0.1;
@@ -102,16 +105,21 @@ window.onload = function () {
 	function totSA(nbBillets){
 	
 		return nbBillets*9;
+		
 	}
 
-	//MODIFICATION DU CANVAS SELON LE CHOIX DE L'UTILISATEUR
-	function canvasTarifPlein(){
+
+
+
+
+//MODIFICATION DU CANVAS SELON LE CHOIX DE L'UTILISATEUR
+	function PleinTarifCanvas(){
 
 		var donnees ={
 				type: "column",
 				name: "Nombre de billets",
-				//legendText: "Nombre de ticket",
-				//showInLegend: true, 
+	//			legendText: "Nombre de ticket",
+	//			showInLegend: true, 
 				dataPoints: tabP
 				};
 				
@@ -125,7 +133,7 @@ window.onload = function () {
 	
 	
 	//Tarif Reduit
-	function canvasTarifReduit(){
+	function TarifReduitCanvas(){
 	
 		var donnees ={
 				type: "column",
@@ -144,7 +152,7 @@ window.onload = function () {
 	
 	
 	//Tarif Enfant
-	function canvasTarifEnfant(){
+	function TarifEnfantCanvas(){
 	
 		var donnees ={
 				type: "column",
@@ -161,7 +169,7 @@ window.onload = function () {
 	
 	
 	//Offert
-	function canvasOffert(){
+	function OffertCanvas(){
 	
 		var donnees ={
 				type: "column",
@@ -178,7 +186,7 @@ window.onload = function () {
 	
 	
 	//Tarif SJ
-	function canvasSpecialeJ(){
+	function SJCanvas(){
 	
 		var donnees ={
 				type: "column",
@@ -195,7 +203,7 @@ window.onload = function () {
 	
 	
 	//Tarif SJ
-	function canvasSpecialeA(){
+	function SACanvas(){
 	
 		var donnees ={
 				type: "column",
@@ -211,12 +219,12 @@ window.onload = function () {
 	}
 	
 	
-	function recette(){
+	function Recette(){
 
 		var donnees ={
 					type: "column",
 					name: "Recette",
-					//legendText: "Nombre de ticket",
+//					legendText: "Nombre de ticket",
 					showInLegend: true, 
 					dataPoints: tabRecette
 				};
@@ -229,12 +237,12 @@ window.onload = function () {
 	
 	
 	//Depenses
-	function depenses(){
+	function Depenses(){
 
 		var donnees ={
 					type: "column",
 					name: "Depenses",
-			        //legendText: "Nombre de ticket",
+//					legendText: "Nombre de ticket",
 					showInLegend: true, 
 					dataPoints: tabDepenses
 				};
@@ -245,9 +253,10 @@ window.onload = function () {
 		chart.options.toolTip.content = popUpNoTot2;
 		chart.render();
 	}
-
+	
+	
 	//Recette + Depenses
-	function recetteTotale(){
+	function Recette_Depenses(){
 
 		var recette ={
 					type: "column",
@@ -297,161 +306,168 @@ window.onload = function () {
 		chart.options.data = [];
 		chart.options.data.push(recette);
 		chart.options.data.push(depenses);
-		chart.render();	
+		chart.render();
+	
 	}
-
-		//Les Events listener de chaque bouton pour modifier les paramètres
-	//Tarif Enfant
-	document.getElementById('enfant').addEventListener('click', function(){
-		console.log('click');
-		canvasTarifEnfant();
-		document.getElementById('Change').hidden=true;
-	});
-
-	//Plein Tarif
-	document.getElementById('PleinTarif').addEventListener('click', function(){
-		console.log('click');
-		canvasTarifPlein();
-		document.getElementById('Change').hidden=true;
-	});
-
-	//Tarif Reduit
-	document.getElementById('TarifReduit').addEventListener('click', function(){
-		console.log('click');
-		canvasTarifReduit();
-		document.getElementById('Change').hidden=true;
-	});
+	
 
 
-	//Tarif SJ
-	document.getElementById('Sj').addEventListener('click', function(){
-		console.log('click');
-		canvasSpecialeJ();
-		document.getElementById('Change').hidden=true;
-	});
+	
+	
+//Les Events listener de chaque bouton pour modifier les paramètres
+//Tarif Enfant
+document.getElementById('enfant').addEventListener('click', function(){
+	console.log('click');
+	TarifEnfantCanvas();
+	document.getElementById('Change').hidden=true;
+});
 
-	//Tarif SA
-	document.getElementById('Sa').addEventListener('click', function(){
-		console.log('click');
-		canvasSpecialeA();
-		document.getElementById('Change').hidden=true;
-	});
+//Plein Tarif
+document.getElementById('PleinTarif').addEventListener('click', function(){
+	console.log('click');
+	PleinTarifCanvas();
+	document.getElementById('Change').hidden=true;
+});
 
-	//Offert
-	document.getElementById('Offert').addEventListener('click', function(){
-		console.log('click');
-		canvasOffert();
-		document.getElementById('Change').hidden=true;
-	});
+//Tarif Reduit
+document.getElementById('TarifReduit').addEventListener('click', function(){
+	console.log('click');
+	TarifReduitCanvas();
+	document.getElementById('Change').hidden=true;
+});
 
-	//Recette
-	document.getElementById('Recette').addEventListener('click', function(){
-		console.log('click');
-		recette();
-		document.getElementById('Change').hidden=true;
-	});
 
-	//Depenses
-	document.getElementById('Depenses').addEventListener('click', function(){
-		console.log('click');
-		depenses();
-		document.getElementById('Change').hidden=true;
-	});
+//Tarif SJ
+document.getElementById('Sj').addEventListener('click', function(){
+	console.log('click');
+	SJCanvas();
+	document.getElementById('Change').hidden=true;
+});
 
-	//Recette + Depenses
-	document.getElementById('Recette+Depenses').addEventListener('click', function(){
-		console.log('click');
-		document.getElementById('Change').hidden=false;
-		recetteTotale();
-	});
+//Tarif SA
+document.getElementById('Sa').addEventListener('click', function(){
+	console.log('click');
+	SACanvas();
+	document.getElementById('Change').hidden=true;
+});
 
-	var column = true;
-	document.getElementById('Change').addEventListener('click', function(){
-		if(column){
-			changeAspect();
-			column = false;
-		}else{
-			recetteTotale();
-			column = true;
-		}
-		});	
+//Offert
+document.getElementById('Offert').addEventListener('click', function(){
+	console.log('click');
+	OffertCanvas();
+	document.getElementById('Change').hidden=true;
+});
 
+//Recette
+document.getElementById('Recette').addEventListener('click', function(){
+	console.log('click');
+	Recette();
+	document.getElementById('Change').hidden=true;
+});
+
+//Depenses
+document.getElementById('Depenses').addEventListener('click', function(){
+	console.log('click');
+	Depenses();
+	document.getElementById('Change').hidden=true;
+});
+
+//Recette + Depenses
+document.getElementById('Recette+Depenses').addEventListener('click', function(){
+	console.log('click');
+	document.getElementById('Change').hidden=false;
+	Recette_Depenses();
+});
+
+var column = true;
+document.getElementById('Change').addEventListener('click', function(){
+	if(column){
+		changeAspect();
+		column = false;
+	}else{
+		Recette_Depenses();
+		column = true;
+	}
+});	
+	
 	}, 100);
-
+	
+	
+	
+	
+	
 }
 
-	var tabP = [], tabR=[], tabO=[], tabSJ=[], tabSA=[], tabE=[], tabRecette=[], tabDepenses=[];
+var tabP = [], tabR=[], tabO=[], tabSJ=[], tabSA=[], tabE=[], tabRecette=[], tabDepenses=[];
 
-	function getSpec(){
+//P / R / O / SJ / SA / E
 
-		$.getJSON('visualisation.php',function(data) {
 
-			$.each(data,function(Titre,val){
 
-				$.each(val,function(key2,val2){
 
-					switch (key2){
-						case "P":
-							tabP.push({
-								label: Titre,
-								y: val2
-							});
-							break;	
-					
-						case "R":
-							tabR.push({
-								label: Titre,
-								y: val2
-							});	
-							break;				
 
-						case "O":
-							tabO.push({
-								label: Titre,
-								y: val2
-							});
-							break;
 
-						case "SJ":
-							tabSJ.push({
-								label: Titre,
-								y: val2
-							});	
-							break;
+function getTabs(){
 
-						case "SA":
-							tabSA.push({
-								label: Titre,
-								y: val2
-							});	
-							break;
+	
+	$.getJSON('getCSV.php', function(data) {
+		
 
-						case "E":
-							tabE.push({
-								label: Titre,
-								y: val2
-							});	
-							break;
 
-						case "Recette":
-							tabRecette.push({
-								label: Titre,
-								y: val2
-							});	
-							break;
-
-						case "Depenses":
-							tabDepenses.push({
-								label: Titre,
-								y: val2
-							});	
-							break;
+	
+        $.each(data, function(Titre, val) {  
+         
+			$.each(val, function(key2, val2){		                                         		
+					if(key2 == 'P'){
+						tabP.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+					 }else if(key2 == 'R'){
+						tabR.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+	 				 }else if(key2 == 'O'){
+						tabO.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+					}else if(key2 == 'SJ'){
+						tabSJ.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+					});
+					}else if(key2 == 'SA'){
+						tabSA.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+					}else if(key2 == 'E'){
+						tabE.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+					}else if(key2 == 'Recette'){
+						tabRecette.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
+					}else if(key2 == 'Depenses'){
+						tabDepenses.push({
+							label: Titre,
+							y: val2 //parfois on a val2 qui est un string donc on le convertit en Number
+						});
 					}
-				});
-				console.log(tabP);
-			});
-		});
-
-		setTimeout(function () {console.log(tabP); }, 100);
+	
+        	});                            			
+		});			
+		
+    });//getJson 
+    
+    setTimeout(function () {console.log(tabP); }, 100);
         console.log(tabP);
-	} 
+
+        
+}        
+
