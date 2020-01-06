@@ -1,37 +1,13 @@
-<?php 
-	session_start();
-?>
 
-<!DOCTYPE html>	
-<html>
-	<head>
-		<title>Theatres de Bourbon</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
-	</head>
-	
-	<body>
-	  	<div class="bandeau">
-			<div class="petitPanier">
-				<table>Billets en vente exclusivement sur les lieux du festival: Monétay,Monteignet, Veauce  du 2 au 6 août dès 11h00 et le 6 août à Moulins de 19h00 à 20h00.
-					Attention! à Moulins le début du spectacle à 20h00.
-				</table>
-			</div><!-- class="petitPanier"-->							
-			<h1> Festival Théâtres de Bourbon </h1>
-		</div ><!--class="bandeau"-->
-		<div class="menu">
-			<ul class="navbar">
-				<a href="index.php">Le site :</a>
-				<li>Qui sommes nous?</li>	
-				<li><a href="jours.php">Jour par Jour</a></li>
-				<li><a href="lieu.php">Lieu par Lieu</a></li>
-				<li><a href="spectacle.php">Spectacles</a></li>
-				<li>Tarifs</li>
-			</ul>			
-		</div>
-		<main>
-			<div class="decalage">
-				<?php 
+
+<?php 
+	//header("Content-type: text/javascript");
+
+		// $specCSV = csvSpectacle();
+		// echo json_encode($specCSV);
+
+
+			function csvSpectacle(){
 					/*CODE A METTRE DANS LE PANIER APRES CONFIRMATION DU PAYEMENT*/
 					if (($handle = fopen("ResultatsFestival2.csv", "r")) !== FALSE) { //r+ -> lecture et ecriture
 							fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
@@ -58,19 +34,36 @@
 								//fputcsv($handle, $data); //et on les remet dans le csv
 							}
 						fclose($handle);
-						echo "<p>";
+
+					}
+
+						$specTab = array();
+
 						foreach ($tab as $line){
-								foreach($line as $i => $val){
-									echo $val . " (" . $i . "); ";
-								}
-							echo "</p>\n";
+									if(empty($specTab[$line[2]])){
+
+										 $specTab[$line[2]] = array ( "P" => intval($line[6]), "R" => intval($line[7]), "O" => intval($line[8]), "SJ" => intval($line[9]), "SA" => intval($line[10]), "E" => intval($line[11]), "Recette" => (($line[6]*15 + $line[7]*10)*0.1), "Depenses" => ($line[9]*12.5 + $line[10]*9));
+            
+       								} else{    
+								        
+								        $add = array ( "P" => $line[6] + $specTab[$line[2]]["P"], "R" => $line[7] + $specTab[$line[2]]["R"], "O" => $line[8] + $specTab[$line[2]]["O"], "SJ" => $line[9] + $specTab[$line[2]]["SJ"], "SA" => $line[10] + $tableau[$line[2]]["SA"], "E" => $line[11] + $tableau[$line[2]]["E"], "Recette" => (($line[6]*15 + $line[7]*10)*0.1) + $specTab[$line[2]]["Recette"], "Depenses" => (($line[9])*12.5 + ($line[10])*9) + $specTab[$line[2]]["Depenses"]);
+								        $specTab[$line[2]]= $add;
+								    }      
 						}
 						
-					}
-					
+						return $specTab;
+				}
 					
 				?>
-			</div><!--  decalage -->	
-		</main> 
+
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<?php
+		var_dump(csvSpectacle());
+		?>
 	</body>
 </html>
