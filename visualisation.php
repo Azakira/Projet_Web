@@ -46,12 +46,12 @@
             
        								} else{    
 								        
-								        $add = array ("P" => $line[6] + $specTab[$line[2]]["P"], 
-													  "R" => $line[7] + $specTab[$line[2]]["R"], 
-													  "O" => $line[8] + $specTab[$line[2]]["O"], 
-													  "SJ" => $line[9] + $specTab[$line[2]]["SJ"], 
-													  "SA" => $line[10] + $specTab[$line[2]]["SA"], 
-													  "E" => $line[11] + $specTab[$line[2]]["E"], 
+								        $add = array ("P" => intval($line[6]) + $specTab[$line[2]]["P"], 
+													  "R" => intval($line[7]) + $specTab[$line[2]]["R"], 
+													  "O" => intval($line[8]) + $specTab[$line[2]]["O"], 
+													  "SJ" => intval($line[9]) + $specTab[$line[2]]["SJ"], 
+													  "SA" => intval($line[10]) + $specTab[$line[2]]["SA"], 
+													  "E" => intval($line[11]) + $specTab[$line[2]]["E"], 
 													  "Recette" => (($line[6]*15 + $line[7]*10)*0.1) + $specTab[$line[2]]["Recette"], 
 													  "Depenses" => (($line[9])*12.5 + ($line[10])*9) + $specTab[$line[2]]["Depenses"]);
 								        $specTab[$line[2]]= $add;
