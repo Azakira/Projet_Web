@@ -302,6 +302,7 @@
 					}
 
 
+					//TODO: RESIZE INPUTS NUMBER W/ CSS
 					echo "<form id='panier' action='panier.php' method='POST'>\n";
 					
 					echo "<table><thead><tr> <th>Type de place</th>\n <th>nb de places</th>\n <th>Prix Unitaire</th><tr></thead>\n"; 
