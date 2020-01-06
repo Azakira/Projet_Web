@@ -42,7 +42,7 @@
 						foreach ($tab as $line){
 									if(empty($specTab[$line[2]])){
 
-										 $specTab[$line[2]] = array ( "P" => intval($line[6]), "R" => intval($line[7]), "O" => intval($line[8]), "SJ" => intval($line[9]), "SA" => intval($line[10]), "E" => intval($line[11]), "Recette" => (($line[6]*15 + $line[7]*10)*0.1), "Depenses" => ($line[9]*12.5 + $line[10]*9));
+										 $specTab[$line[2]] = array ( "P" => intval($line[6]), "R" => intval($line[7]), "O" => intval($line[8]), "SJ" => intval($line[9]), "SA" => intval($line[10]), "E" => intval($line[11]), "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1), "Depenses" => (intval($line[9])*12.5 + intval($line[10])*9));
             
        								} else{    
 								        
@@ -52,8 +52,8 @@
 													  "SJ" => intval($line[9]) + $specTab[$line[2]]["SJ"], 
 													  "SA" => intval($line[10]) + $specTab[$line[2]]["SA"], 
 													  "E" => intval($line[11]) + $specTab[$line[2]]["E"], 
-													  "Recette" => (($line[6]*15 + $line[7]*10)*0.1) + $specTab[$line[2]]["Recette"], 
-													  "Depenses" => (($line[9])*12.5 + ($line[10])*9) + $specTab[$line[2]]["Depenses"]);
+													  "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1) + $specTab[$line[2]]["Recette"], 
+													  "Depenses" => ((intval($line[9]))*12.5 + (intval($line[10])*9) + $specTab[$line[2]]["Depenses"]));
 								        $specTab[$line[2]]= $add;
 								    }      
 						}
