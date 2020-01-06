@@ -3,12 +3,13 @@
 <head>  
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js'></script>
 <script>
-	
+
 var tabP = [], tabR=[], tabO=[], tabSJ=[], tabSA=[], tabE=[], tabRecette=[], tabDepenses=[];
 function getSpec(){
 $.getJSON('visualisation.php',function(data) {
 	$.each(data,function(Titre,val){
 		$.each(val,function(key2,val2){
+			switch ($key2){
 			if(key2 =='P'){
 				tabP.push({
 					label: Titre,
@@ -51,6 +52,7 @@ $.getJSON('visualisation.php',function(data) {
 					y: val2
 				});	
 			}
+		}
 		});
 	});
 });
@@ -61,7 +63,6 @@ window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
-
 	
 });
 SJCanvas();

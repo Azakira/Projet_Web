@@ -1,10 +1,10 @@
 
 
 <?php 
-	//header("Content-type: text/javascript");
+	header("Content-type: text/javascript");
 
-		// $specCSV = csvSpectacle();
-		// echo json_encode($specCSV);
+		$specCSV = csvSpectacle();
+		echo json_encode($specCSV);
 
 
 			function csvSpectacle(){
