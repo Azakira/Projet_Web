@@ -13,12 +13,13 @@
 
 		<div class="menu">
 			<ul class="navbar">
-				<a href="index.php">Le site :</a>
-				<li><a href="jours.php">Jour par Jour</a></li>
-				<li><a href="lieu.php">Lieu par Lieu</a></li>
-				<li><a href="spectacle.php">Spectacles</a></li>
-				<li><a href="troupe.php">Troupe</a></li>
-				<li><a href = "panier.php">Panier</a></li>
+				<a href="index.php">Le site :</a>
+                <li><a href="jours.php">Par jour</a></li>
+                <li><a href="troupe.php">Par troupe </a></li>
+                <li><a href="lieu.php">Par lieu</a></li>
+                <li><a href="spectacle.php">Par spectacle</a></li>
+                <li><a href="troupe.php">Par troupe</a></li>
+                <li><a href="panier.php"> Panier</a> </li>  
 			</ul>			
 		</div>
 		

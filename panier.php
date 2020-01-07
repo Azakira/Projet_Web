@@ -27,16 +27,13 @@
 		</div ><!--class="bandeau"-->
 		<div class="menu">
 			<ul class="navbar">
-				<a href="index.html">Le site :</a>
-                <li><a href="jours.php">Jour</a></li>
-                <li><a href="troupe.php">Troupe</a></li>
-                <li><a href=".lieu.php">Lieu</a></li>
-                <li><a href="spectacle.php">Spectacle</a></li>
-                <li><a href="troupe.php">troupe</a></li>
-                <li><a href="panier.php"> Panier</a> </li>   
-                <li><a href="depenses.html"> depenses par Representation</a> </li>   
-                <li><a href="depensesLieu.html"> depenses par Lieu</a> </li>  
-                <li><a href="depensesTroupe.html"> depenses par Troupe</a> </li> 
+				<a href="index.php">Le site :</a>
+                <li><a href="jours.php">Par jour</a></li>
+                <li><a href="troupe.php">Par troupe </a></li>
+                <li><a href="lieu.php">Par lieu</a></li>
+                <li><a href="spectacle.php">Par spectacle</a></li>
+                <li><a href="troupe.php">Par troupe</a></li>
+                <li><a href="panier.php"> Panier</a> </li>  
 			</ul>
 		</div><!--class="menu"-->
 		
