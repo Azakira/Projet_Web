@@ -72,7 +72,7 @@
 						fclose($handle);
 						$res = array();
 						foreach($specTab as $spec => $line){
-							$spec2=html_entity_decode($spec);
+							$spec2=convertHTML($spec);
 							if(empty($res[$spec2])){
 								$res[$spec2] = $line;
 

@@ -72,16 +72,15 @@
 								    }      
 						}
 						fclose($handle);
-						// $res = array();
-						// foreach($specTab as $spec => $line){
-						// 	$spec2=html_entity_decode($spec);
-						// 	if(empty($res[$spec2])){
-						// 		$res[$spec2] = $line;
+						$res = array();
+						foreach($specTab as $spec => $line){
+							$spec2=convertHTML($spec);
+							if(empty($res[$spec2])){
+								$res[$spec2] = $line;
 
-							//}
-						//}
-
-						return $specTab;
+							}
+						}
+						return $res;
 				}
 					
 				?>
