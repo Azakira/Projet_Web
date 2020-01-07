@@ -379,9 +379,9 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 		var tabP = [], tabR=[], tabO=[], tabSJ=[], tabSA=[], tabE=[], tabRecette=[], tabDepenses=[]; //pas besoin d'attrendre le chargement de la page pour creer nos taleaux
 
 
-		function getSpec(){
+		function getSpec(){ 
 
-			$.getJSON('visualisation.php',function(data) { //récupère l'objet pour executer une fonction que l'on définit 
+			$.getJSON('visualisation.php',function(data) { //La méthode getJSON() est utilisée pour obtenir les données JSON à l'aide d'une requête AJAX HTTP GET.
 
 				$.each(data,function(Titre,val){ //double foreach pour les valeurs function(clé,valeur)
 
