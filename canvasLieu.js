@@ -378,7 +378,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 
 		function getLieu(){
 
-			$.getJSON('visualisationTroupe.php',function(data) { //récupère l'objet pour executer une fonction que l'on définit 
+			$.getJSON('visualisationLieu.php',function(data) { //récupère l'objet pour executer une fonction que l'on définit 
 
 				$.each(data,function(Titre,val){ //double foreach pour les valeurs function(clé,valeur)
 

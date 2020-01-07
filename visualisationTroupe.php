@@ -60,14 +60,14 @@
             
        								} else{    
 								        
-								        $add = array ("P" => intval($line[6]) + $specTab[$line[2]]["P"], 
-													  "R" => intval($line[7]) + $specTab[$line[2]]["R"], 
-													  "O" => intval($line[8]) + $specTab[$line[2]]["O"], 
-													  "SJ" => intval($line[9]) + $specTab[$line[2]]["SJ"], 
-													  "SA" => intval($line[10]) + $specTab[$line[2]]["SA"], 
-													  "E" => intval($line[11]) + $specTab[$line[2]]["E"], 
-													  "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1) + $specTab[$line[2]]["Recette"], 
-													  "Depenses" => ((intval($line[9]))*12.5 + (intval($line[10])*9) + $specTab[$line[2]]["Depenses"]));
+								        $add = array ("P" => intval($line[6]) + $specTab[$line[5]]["P"], 
+													  "R" => intval($line[7]) + $specTab[$line[5]]["R"], 
+													  "O" => intval($line[8]) + $specTab[$line[5]]["O"], 
+													  "SJ" => intval($line[9]) + $specTab[$line[5]]["SJ"], 
+													  "SA" => intval($line[10]) + $specTab[$line[5]]["SA"], 
+													  "E" => intval($line[11]) + $specTab[$line[5]]["E"], 
+													  "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1) + $specTab[$line[5]]["Recette"], 
+													  "Depenses" => ((intval($line[9]))*12.5 + (intval($line[10])*9) + $specTab[$line[5]]["Depenses"]));
 								        $specTab[$line[5]]= $add;
 								    }      
 						}
