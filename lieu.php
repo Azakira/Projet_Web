@@ -18,12 +18,16 @@
 
 		<div class="menu">
 			<ul class="navbar">
-				<a href="index.php">Le site :</a>
-				<li><a href="jours.php">Jour par Jour</a></li>
-				<li><a href="lieu.php">Lieu par Lieu</a></li>	
-				<li><a href="spectacle.php">Spectacles</a></li>
-				<li><a href="troupe.php">Troupe</a></li>
-				<li><a href = "panier.php">Panier</a></li>
+				<a href="index.html">Le site :</a>
+                <li><a href="jours.php">Jour</a></li>
+                <li><a href="troupe.php">Troupe</a></li>
+                <li><a href=".lieu.php">Lieu</a></li>
+                <li><a href="spectacle.php">Spectacle</a></li>
+                <li><a href="troupe.php">troupe</a></li>
+                <li><a href="panier.php"> Panier</a> </li>   
+                <li><a href="depenses.html"> depenses par Representation</a> </li>   
+                <li><a href="depensesLieu.html"> depenses par Lieu</a> </li>  
+                <li><a href="depensesTroupe.html"> depenses par Troupe</a> </li> 
 			</ul>			
 		</div>
 		

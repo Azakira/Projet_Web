@@ -193,7 +193,15 @@
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js'></script>
         <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <script type="text/javascript" src="fancybox/jquery.easing.1.4.1.js"></script>    
-        <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />  
+        <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" /> 
+        <style>	.panierFinal{	color:white;
+								width:12%;
+								text-align: center;
+								position: fixed;
+								top: 0%;
+								right:0%
+        			}
+        </style> 
 
 	</head>
 	
@@ -210,13 +218,16 @@
 
 		<div class="menu">
 			<ul class="navbar">
-				<a href="index.php">Le site :</a>
-				<li><a href="jours.php">Jour par Jour</a></li>
-				<li><a href="lieu.php">Lieu par Lieu</a></li>	
-				<li><a href="spectacle.php">Spectacles</a></li>
-				<li><a href="troupe.php">Troupe</a></li>
-				<li><a href = "panier.php">Panier</a></li>
-				<li>Tarifs</li>
+				<a href="index.html">Le site :</a>
+                <li><a href="jours.php">Jour</a></li>
+                <li><a href="troupe.php">Troupe</a></li>
+                <li><a href=".lieu.php">Lieu</a></li>
+                <li><a href="spectacle.php">Spectacle</a></li>
+                <li><a href="troupe.php">troupe</a></li>
+                <li><a href="panier.php"> Panier</a> </li>   
+                <li><a href="depenses.html"> depenses par Representation</a> </li>   
+                <li><a href="depensesLieu.html"> depenses par Lieu</a> </li>  
+                <li><a href="depensesTroupe.html"> depenses par Troupe</a> </li> 
 			</ul>
 		</div>
 
@@ -250,8 +261,6 @@
 					 *	TESTS
 					 *	
 					 **/
-
-					echo "<p id=\"test\"> Testing block </p></br>\n";
 					
 					
 					echo "<select name='titre' id='titre' onchange='hiddenDDL2()'>\n";
@@ -359,17 +368,17 @@
 							// var_dump(intval($com["spectacle"]["heure"]));
 
 							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"] && !isset($_POST['modify'])){
-								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier NIBBA0');"."</script>";
+								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier');"."</script>";
 
 							}else{
 
 								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"]) && is_null($_POST['modify'])){
 									if($limitTime1 > intval($com["spectacle"]["heure"])){
-										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché NIBBA1');"."</script>";
+										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché ');"."</script>";
 									}
 								} else{
 									if($limitTime2 < intval($com["spectacle"]["heure"])&& is_null($_POST['modify'])){
-										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi NIBBA2');"."</script>";
+										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi ');"."</script>";
 									}
 								}
 							echo "</br>";
@@ -403,6 +412,7 @@
 					            
 					    });
 					</script>
+					<div class="Lieu">
 					<section class="proseTarif">
 						<section><!-- Présentation des tarifs -->
 
@@ -542,6 +552,7 @@
 						</section><!-- Explication des tarifs -->
 
 					</section><!--section class="proseTarif"-->	
+				</div>
 
 			</div><!--class=\"decalage\"-->
 		</main>
