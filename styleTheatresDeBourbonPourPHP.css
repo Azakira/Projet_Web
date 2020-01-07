@@ -29,7 +29,7 @@ body {
 		background-color: #B5CD51; 
 		font-family:  Vijaya, Garamond, sans-serif; 
 		font-size: 100%;
-		background-image:url("peleMele.jpg");
+		background-image:url(images/peleMele.jpg);
 		background-size: 100%;
 		background-repeat: repeat;
  }
@@ -305,35 +305,27 @@ figcaption{
   height:3em;
   border: 1px solid red;
 }
-table {
-	border-collapse: collapse;
-	width: 100%
+
+tr, td {
+  border: solid;
 }
 
 td {
-  border-bottom: 1px solid #b9e398 ;
+  border: 1px solid #b9e398 ;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-/* tr, td { */
-  /* border: solid; */
-/* } */
-
-th, td {
-  padding-top: 8px;
-  text-align: left;
-  border-bottom: 1px solid #b9e398;
+tr, td {
+  border: solid;
 }
 
-/* td { */
-  /* border: 1px solid #b9e398 ; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-/* } */
-
-tr:hover {background-color:rgb(15,49,135);opacity:0.6;}
+td {
+  border: 1px solid #b9e398 ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /******************************* Gestion des bulles ****************************/ 
 .Spectacle{
@@ -391,33 +383,6 @@ tr:hover {background-color:rgb(15,49,135);opacity:0.6;}
 	text-orientation: mixed;
 	/*text-orientation:sideways;*/
 	text-align:left;
-}
-
-
-.proseTarif{
-	/*border:1px solid white;*/
-	background:#077bd2;
-	border-radius:2em;
-	text-align: justify;
-	padding: 1em 1em 1em 1em;
-	margin-top:2e100
-	margin-bottom:2em;
-    background-color :#305370; /*bronze*/
-}
-
-.panierFinal{
-	position: fixed;
-	top:0px;
-	right:10px;
-	font-family:"font-panier2";
-	font-size: 15px;
-	text-align: center;
-	
-}
-
-@font-face{ 	
-	font-family: "font-panier"; 	src: url('Montserrat-SemiBold.ttf'); 
-	font-family: "font-panier2"; 	src: url('Montserrat-BlackItalic.ttf'); 
 }
 /*******************************   Gestion des petits carrés... *****************************/	
 .emballage {
