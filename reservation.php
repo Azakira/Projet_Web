@@ -130,6 +130,7 @@
 					 $ind2 = $cpt2;
 					//return $tableau[$ville1][$ind2];
 					$timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
+					print_r($timeAndDistance);
 					$timeAndDistance[0]= intval($timeAndDistance[0]);
 					$timeAndDistance[1]= intval($timeAndDistance[1]);
 					$time=intval($timeAndDistance[1]);
@@ -141,7 +142,7 @@
 			}
 
 			if($ind2 == -1){
-				echo "La ville du 2eme spectacle n'existe pas,veuillez rééssayer pls ";
+				echo "La ville du 2eme spectacle n'existe pas,veuillez rééssayer SVP ";
 			}
 		}
 		return $timeAndDistance;
@@ -356,7 +357,7 @@
 							// var_dump($limitTime);
 							// var_dump(intval($com["spectacle"]["heure"]));
 
-							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"] && is_null($_POST['modify'])){
+							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"] && !isset($_POST['modify'])){
 								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier NIBBA0');"."</script>";
 
 							}else{
