@@ -111,8 +111,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 			var donnees ={
 					type: "column",
 					name: "Nombre de billets",
-					//legendText: "Nombre de ticket",
-					//showInLegend: true, 
+					fontSize: 10,
 					dataPoints: tabP
 					}; //jeu données
 					
