@@ -1,10 +1,10 @@
 window.onload = function () { //au chargement de la fenetre on applique notre fonction
 
-		getSpec(); //recupere ton tableau rempli
+		getLieu(); //recupere ton tableau rempli
 
 		setTimeout(function () { 
 
-		var chart = new CanvasJS.Chart("Representation", {
+		var chart = new CanvasJS.Chart("Lieu", {
 			animationEnabled: true, 
 			title: {}, //précréer le titre vide
 			toolTip: {
@@ -58,8 +58,8 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 			var  str2 = "<span style= \"color:"+e.entries[1].dataSeries.color + "\"> "+e.entries[1].dataSeries.name+"</span> : <strong>"+e.entries[1].dataPoint.y+"</strong> €<br/>";
 			total = e.entries[0].dataPoint.y - e.entries[1].dataPoint.y ;
 			str3 = "<span style = \"color:Tomato\">Total : </span><strong>"+total+"</strong>€<br/>";
-			titreSpec = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.label)+"</strong></span><br/>";
-			return (titreSpec.concat(str1.concat(str2))).concat(str3);
+			troupe = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.label)+"</strong></span><br/>";
+			return (troupe.concat(str1.concat(str2))).concat(str3);
 		}
 		
 		// places gratuites(O et E)
@@ -110,13 +110,11 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 
 			var donnees ={
 					type: "column",
-					name: "Nombre de billets",
-					//legendText: "Nombre de ticket",
-					//showInLegend: true, 
+					name: "Nombre de billets", 
 					dataPoints: tabP
 					}; //jeu données
 					
-			chart.options.title.text="Nombre de billet Plein Tarif vendu par Representation";
+			chart.options.title.text="Nombre de billet Plein Tarif vendu par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpPT;
@@ -131,12 +129,10 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 			var donnees ={
 					type: "column",
 					name: "Nombre de billets",
-					//legendText: "Nombre de ticket",
-					//showInLegend: true, 
 					dataPoints: tabR
 				};
 		
-			chart.options.title.text="Nombre de billet Tarif Reduit vendu par Representation"; // modifie le title du canvas
+			chart.options.title.text="Nombre de billet Tarif Reduit vendu par Lieu"; // modifie le title du canvas
 			chart.options.data = []; //réinitialise les données du canvas
 			chart.options.data.push(donnees); //on met notre jeu de données dans notre data du canvas
 			chart.options.toolTip.content = popUpTR; //on met le contenu de notre fonction dans l'affichage du canvans
@@ -153,7 +149,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 					dataPoints: tabE
 				};
 		
-			chart.options.title.text="Nombre de billets Enfant vendu par Representation";
+			chart.options.title.text="Nombre de billets Enfant vendu par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpNoTot;
@@ -170,7 +166,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 					dataPoints: tabO
 				};
 		
-			chart.options.title.text="Nombre de billet Offert par Representation";
+			chart.options.title.text="Nombre de billet Offert par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpNoTot;
@@ -187,7 +183,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 					dataPoints: tabSJ
 				};
 		
-			chart.options.title.text="Nombre de billet Tarif SJ payé par Representation";
+			chart.options.title.text="Nombre de billet Tarif SJ payé par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpSJ;
@@ -204,7 +200,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 					dataPoints: tabSA
 				};
 		
-			chart.options.title.text="Nombre de billet Tarif SA payé par Representation";
+			chart.options.title.text="Nombre de billet Tarif SA payé par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpSA;
@@ -219,7 +215,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 						name: "Recette", 
 						dataPoints: tabRecette
 					};
-			chart.options.title.text="Recette par l'organisateur du Festival";
+			chart.options.title.text="Recette de l'organisateur du Festival par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpNoTot2;
@@ -236,7 +232,7 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 						dataPoints: tabDepenses
 					};
 					
-			chart.options.title.text="Depenses par l'organisateur du Festival";
+			chart.options.title.text="Depenses de l'organisateur du Festival par Lieu";
 			chart.options.data = [];
 			chart.options.data.push(donnees);
 			chart.options.toolTip.content = popUpNoTot2;
@@ -380,9 +376,9 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 		var tabP = [], tabR=[], tabO=[], tabSJ=[], tabSA=[], tabE=[], tabRecette=[], tabDepenses=[]; //pas besoin d'attrendre le chargement de la page pour creer nos taleaux
 
 
-		function getSpec(){
+		function getLieu(){
 
-			$.getJSON('visualisation.php',function(data) { //récupère l'objet pour executer une fonction que l'on définit 
+			$.getJSON('visualisationTroupe.php',function(data) { //récupère l'objet pour executer une fonction que l'on définit 
 
 				$.each(data,function(Titre,val){ //double foreach pour les valeurs function(clé,valeur)
 
@@ -452,5 +448,4 @@ window.onload = function () { //au chargement de la fenetre on applique notre fo
 
 			setTimeout(function () {console.log(tabP); }, 100);
 	        //console.log("tabP :"+ tabP); //pb de récupération des valeurs à l'extérieur du JSON,json s'éxécute après je javascript donc on met un délai pour récupérer les valeurs avant l'affichage le tableau
-
-		} 
+}

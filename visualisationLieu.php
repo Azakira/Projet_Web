@@ -1,8 +1,7 @@
-
 <?php 
 	header("Content-type: text/javascript");
-		$specCSV = csvSpectacle();
-	 echo json_encode($specCSV);
+		$lieuCSV = csvLieu();
+	 echo json_encode($lieuCSV);
 
 		function convertHTML($str){
 						$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
@@ -18,7 +17,7 @@
 					}
 
 
-			function csvSpectacle(){
+			function csvLieu(){
 					/*CODE A METTRE DANS LE PANIER APRES CONFIRMATION DU PAYEMENT*/
 					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) { //r+ -> lecture et ecriture
 							fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
@@ -48,11 +47,13 @@
 					}
 						$specTab = array();
 						foreach ($tab as $line){
-									if(empty($specTab[$line[2]])){
-										 $specTab[$line[2]] = array ( "P" => intval($line[6]), 
+									if(empty($specTab[$line[3]])){
+										 $specTab[$line[3]] = array ( "P" => intval($line[6]), 
 										 							  "R" => intval($line[7]), 
-										 							  "O" => intval($line[8]), "SJ" => intval($line[9]),
-										 							  "SA" => intval($line[10]), "E" => intval($line[11]), 
+										 							  "O" => intval($line[8]), 
+										 							  "SJ" => intval($line[9]), 
+										 							  "SA" => intval($line[10]), 
+										 							  "E" => intval($line[11]), 
 										 							  "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1), 
 										 							  "Depenses" => (intval($line[9])*12.5 + intval($line[10])*9));
             
@@ -66,20 +67,20 @@
 													  "E" => intval($line[11]) + $specTab[$line[2]]["E"], 
 													  "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1) + $specTab[$line[2]]["Recette"], 
 													  "Depenses" => ((intval($line[9]))*12.5 + (intval($line[10])*9) + $specTab[$line[2]]["Depenses"]));
-								        $specTab[$line[2]]= $add;
+								        $specTab[$line[3]]= $add;
 								    }      
 						}
 						fclose($handle);
-						$res = array();
-						foreach($specTab as $spec => $line){
-							$spec2=html_entity_decode($spec);
-							if(empty($res[$spec2])){
-								$res[$spec2] = $line;
+						// $res = array();
+						// foreach($specTab as $spec => $line){
+						// 	$spec2=html_entity_decode($spec);
+						// 	if(empty($res[$spec2])){
+						// 		$res[$spec2] = $line;
 
-							}
-						}
+							//}
+						//}
 
-						return $res;
+						return $specTab;
 				}
 					
 				?>
