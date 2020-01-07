@@ -18,6 +18,7 @@
 				</table>
 			</div><!-- class="petitPanier"-->							
 			<h1> Festival Théâtres de Bourbon </h1>
+			
 		</div ><!--class="bandeau"-->
 		<div class="menu">
 			<ul class="navbar">
@@ -26,7 +27,6 @@
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
 				<li><a href = "panier.php">Panier</a></li>
-				<li>Tarifs</li>
 			</ul>			
 		</div>
 		<main>
