@@ -8,13 +8,8 @@
 	<body>
 		<div class="bandeau">						
 			<h1> Festival Théâtres de Bourbon : jour après jour </h1>
+			
 		</div ><!--class="bandeau"-->
-
-		<div class="panierFinal">
-				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
-				</br>
-				<span>Panier</span>
-		</div><!-- class="panierFinal"-->	
 
 		<div class="menu">
 			<ul class="navbar">
@@ -54,8 +49,10 @@
 								if($jour != $fields[0]){
 									if($jour != "null"){
 										echo "</table>\n";
+										echo "</div><!--class=\"decalage\"-->";
 									}
 									$jour = $fields[0];
+									echo "<div class=\"Spectacle\">\n";
 									echo "<h2> " . $jour . "</h2>\n";
 									echo "<table>\n";
 								}
@@ -71,6 +68,7 @@
 								echo "<input name='ville' type=hidden value=\"" . $fields[4] . "\">\n";
 								echo "<input name='troupe' type=hidden value=\"" . $fields[5] . "\">\n";
 								echo "</form>\n</td>\n</tr>\n";
+								
 							
 							}
 					
