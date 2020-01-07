@@ -130,7 +130,6 @@
 					 $ind2 = $cpt2;
 					//return $tableau[$ville1][$ind2];
 					$timeAndDistance = preg_split("[/]",$tableau[$ville1][$ind2]);
-					print_r($timeAndDistance);
 					$timeAndDistance[0]= intval($timeAndDistance[0]);
 					$timeAndDistance[1]= intval($timeAndDistance[1]);
 					$time=intval($timeAndDistance[1]);
@@ -365,16 +364,16 @@
 							// var_dump(intval($com["spectacle"]["heure"]));
 
 							if(intval($arrayTestSpec["heure"]) == intval($com["spectacle"]["heure"]) && $arrayTestSpec["titre"] == $com["spectacle"]["titre"] && $arrayTestSpec["date"] == $com["spectacle"]["date"] && !isset($_POST['modify'])){
-								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionner un spectacle que vous avez déjà dans votre panier');"."</script>";
+								echo "<script language=\"javascript\">" . "alert('Attention vous avez sélectionné un spectacle que vous avez déjà dans votre panier');"."</script>";
 
 							}else{
 
-								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"]) && is_null($_POST['modify'])){
+								if(intval($arrayTestSpec["heure"] <= $com["spectacle"]["heure"]) && !isset($_POST['modify'])){
 									if($limitTime1 > intval($com["spectacle"]["heure"])){
-										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle après que vous allez chevauché ');"."</script>";
+										echo "<script language=\"javascript\">" . "alert('Attention vous avez déja réservé un spectacle à cette heure ci');"."</script>";
 									}
 								} else{
-									if($limitTime2 < intval($com["spectacle"]["heure"])&& is_null($_POST['modify'])){
+									if($limitTime2 < intval($com["spectacle"]["heure"])&& !isset($_POST['modify'])){
 										echo "<script language=\"javascript\">" . "alert('Attention vous avez un spectacle avant qui chevauche celui choisi ');"."</script>";
 									}
 								}
