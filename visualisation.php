@@ -1,15 +1,26 @@
 
-
 <?php 
 	header("Content-type: text/javascript");
-
 		$specCSV = csvSpectacle();
-		echo json_encode($specCSV);
+	 echo json_encode($specCSV);
+
+		function convertHTML($str){
+						$res = preg_replace_callback('([\s\S]+)', // /s => match espaces, /S => match all chars sauf espaces
+							function ($match){
+								$match = preg_replace("[&#44;]", ',', $match);
+								$match = preg_replace("[&#146;]", "’", $match);
+								implode($match); //concatene le tout
+								return $match[0]; //probleme: cree un tableau dont la 1ere case contient ce que l'on veut :/
+							},
+							$str
+						);
+						return $res;
+					}
 
 
 			function csvSpectacle(){
 					/*CODE A METTRE DANS LE PANIER APRES CONFIRMATION DU PAYEMENT*/
-					if (($handle = fopen("ResultatsFestival2.csv", "r")) !== FALSE) { //r+ -> lecture et ecriture
+					if (($handle = fopen("ResultatsFestival.csv", "r")) !== FALSE) { //r+ -> lecture et ecriture
 							fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 							$tab = array();
 							while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
@@ -34,14 +45,10 @@
 								//fputcsv($handle, $data); //et on les remet dans le csv
 							}
 						
-
 					}
-
 						$specTab = array();
-
 						foreach ($tab as $line){
 									if(empty($specTab[$line[2]])){
-
 										 $specTab[$line[2]] = array ( "P" => intval($line[6]), "R" => intval($line[7]), "O" => intval($line[8]), "SJ" => intval($line[9]), "SA" => intval($line[10]), "E" => intval($line[11]), "Recette" => ((intval($line[6])*15 + intval($line[7])*10)*0.1), "Depenses" => (intval($line[9])*12.5 + intval($line[10])*9));
             
        								} else{    
@@ -58,7 +65,16 @@
 								    }      
 						}
 						fclose($handle);
-						return $specTab;
+						$res = array();
+						foreach($specTab as $spec => $line){
+							$spec2=html_entity_decode($spec);
+							if(empty($res[$spec2])){
+								$res[$spec2] = $line;
+
+							}
+						}
+
+						return $res;
 				}
 					
 				?>
