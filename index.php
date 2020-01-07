@@ -8,6 +8,14 @@
 		<title>Theatres de Bourbon</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
+		<style>	.panierFinal{	color:white;
+								width:12%;
+								text-align: center;
+								position: fixed;
+								top: 0%;
+								right:0%
+        			}
+        </style> 
 	</head>
 	
 	<body>
@@ -20,6 +28,11 @@
 			<h1> Festival Théâtres de Bourbon </h1>
 			
 		</div ><!--class="bandeau"-->
+		<div class="panierFinal">
+				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
+				</br>
+				<span>Panier</span>
+		</div><!-- class="panierFinal"-->	
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>

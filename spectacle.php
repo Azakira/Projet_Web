@@ -3,12 +3,25 @@
 		<title>Festival Théâtres de Bourbon : Spectacle par spectacle</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
+		<style>	.panierFinal{	color:white;
+								width:12%;
+								text-align: center;
+								position: fixed;
+								top: 0%;
+								right:0%
+        			}
+        </style> 
 	</head>
 	
 	<body>
 		<div class="bandeau">				
 			<h1> Festival Théâtres de Bourbon : Spectacle par spectacle </h1>
 		</div ><!--class="bandeau"-->
+		<div class="panierFinal">
+				<a href="panier.php"><img src="panier2.jpg" alt="imgPanier"></a>
+				</br>
+				<span>Panier</span>
+		</div><!-- class="panierFinal"-->	
 
 		<div class="menu">
 			<ul class="nav">
