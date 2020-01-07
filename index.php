@@ -28,7 +28,6 @@
                 <li><a href="lieu.php">Par lieu</a></li>
                 <li><a href="spectacle.php">Par spectacle</a></li>
                 <li><a href="troupe.php">Par troupe</a></li>
-                <li><a href="panier.php"> Panier</a> </li>  a></li>
                 <li><a href="panier.php"> Panier</a> </li>     
                 <li><a href="depenses.html"> depenses par Representation</a> </li>   
                 <li><a href="depensesLieu.html"> depenses par Lieu</a> </li>  
