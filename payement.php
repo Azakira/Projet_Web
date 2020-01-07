@@ -6,6 +6,62 @@
 		header('Location: http://localhost/Projet_Web/panier.php');
 		exit();
 	}
+?>
+<!DOCTYPE html>	
+<html>
+	<head>
+		<title>Theatres de Bourbon</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="styleTheatresDeBourbonPourPHP.css">
+	</head>
+	
+	<body>
+	  	<div class="bandeau">
+									
+			<h1> Festival Théâtres de Bourbon </h1>
+		</div ><!--class="bandeau"-->
+		<div class="menu">
+			<ul class="navbar">
+				<a href="index.php">Le site :</a>
+				<li><a href="jours.php">Jour par Jour</a></li>
+				<li><a href="lieu.php">Lieu par Lieu</a></li>
+				<li><a href="spectacle.php">Spectacles</a></li>
+				<li><a href = "panier.php">Panier</a></li>
+				<li>Tarifs</li>
+			</ul>			
+		</div>
+		<main>
+			<div class="decalage">
+				<h1> Merci de votre achat</h1>
+				<div class="Spectacle">	
+				<h2>Récapitulatif:</h2>
+				<?php 
+					foreach($_SESSION['panier'] as $com){
+						echo "<titreSpectacle>"
+						.  $com['spectacle']['titre'] . "</titreSpectacle>, le " 
+						. $com['spectacle']['date'] . " à " 
+						. $com['spectacle']['heure'] . " au "
+						. $com['spectacle']['lieu'] . " à "
+						. $com['spectacle']['ville'] . " par "
+						. $com['spectacle']['troupe'] . " :</br>";
+						if ($com['adulte']>0)
+							echo $com['adulte'] . " place(s) adulte</br>";
+						if ($com['enfant']>0)
+							echo $com['enfant'] . " place(s) enfant</br>";
+						if ($com['tarif_reduit']>0)
+							echo $com['tarif_reduit'] . "place(s) tarif réduit</br>";
+						echo "</br>";
+					}
+				?>
+				</div><!--class="Spectacle"-->
+				<h2> <a href="index.php">Retour à l'accueil</a></h2>
+					
+			</div><!--  decalage -->	
+		</main> 
+	</body>
+</html>
+<?php
+
 	$handle = fopen("ResultatsFestival.csv", "r") or die('Fichier inexistant');
 	$firstline = fgetcsv($handle, 1000, ",");//On retire la 1ere ligne du csv (legendes)
 	$tab = array();
@@ -79,18 +135,8 @@
 		fputcsv($handle2, $line,',');
 	}
 	
+	//On vide le panier
 	
+	$_SESSION['panier'] = array();
 					
 ?>
-
-
-<html>
-	<head>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<?php			
-			print_r($tab);
-		?>
-	</body>
-</html>

@@ -28,7 +28,6 @@
 		<div class="menu">
 			<ul class="navbar">
 				<a href="index.php">Le site :</a>
-				<li>Qui sommes nous?</li>
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
@@ -91,15 +90,7 @@
 						}
 						
 						
-						echo "<form action='panier.php' method='post' style='display:inline'>\n";
-						echo "<div class='Spectacle'>\n";
-						echo "<input name='reset' type='hidden' value='true'>\n";
-						echo "<input type=submit value='Réinitialiser'>\n</form>\n";
 						
-						echo "<form action='payement.php' method='post' style='display:inline'>\n";
-						echo "<input name='pay' type='hidden' value='true'>\n";
-						echo "<input type=submit value='Payer'>\n</form>\n";
-						echo "</div><!--class=\"Spectacle\"--></br>\n";
 						$tr=0;
 						$nbPlaces =0;
 						$prix = 0;
@@ -122,11 +113,11 @@
 							if(intval($commande['tarif_reduit'])!=0)
 								$tr++;						
 							
-							echo "<form method=\"post\" action=\"reservation.php\">\n";
+							echo "<form method=\"post\" action=\"reservation.php\" style='display:inline'>\n";
 							echo "<input name='modify' type='hidden' value='" . serialize($commande) . "'>\n";
 							echo "<input type=\"submit\" value=\"Modifier\" />\n";
 							echo "</form>\n";
-							echo "<form method=\"post\" action=\"panier.php\">\n";
+							echo "<form method=\"post\" action=\"panier.php\" style='display:inline'>\n";
 							echo "<input name='supprSpec' type='hidden' value='". serialize($commande['spectacle']) ."'>\n";
 							echo "<input type=\"submit\" value=\"Supprimer\" />\n";
 							echo "</form>\n";
@@ -137,7 +128,8 @@
 						// var_dump($nbPlaces);
 						// var_dump($prix);
 						if($nbPlaces<=5){
-							echo "Vous pouvez choisir un 6ème spectacle IL VOUS EST OFFERT (Attention tarif le plus bas prix en compte)";
+							echo "<div class=\"Spectacle\"><img src='Info.png' alt='[info]' decoding=low>";
+							echo " Vous pouvez choisir un 6ème spectacle IL VOUS EST OFFERT (Attention tarif le plus bas prix en compte)</div><!--class=\"Spectacle\"-->";
 						}
 						else{
 							switch ($tr) {
@@ -149,8 +141,16 @@
 									break;			
 							}
 						}
-						echo "<div class=\"petitPanier\"> <table> PANIER </br> Nombre places réservées : ". $nbPlaces . "</br> Prix total : " . naturalN($prix) . "</table>
-						</div><!-- class=\"petitPanier\"-->";					
+						echo "<div class=\"petitPanier\"> PANIER </br> Nombre places réservées : ". $nbPlaces . "</br> Prix total : " . naturalN($prix) . ".00€</br></br>";
+						echo "<form action='panier.php' method='post' style='display:inline'>\n";
+						echo "<input name='reset' type='hidden' value='true'>\n";
+						echo "<input type=submit value='Réinitialiser'>\n</form>\n";
+						
+						echo "<form action='payement.php' method='post' style='display:inline'>\n";
+						echo "<input name='pay' type='hidden' value='true'>\n";
+						echo "<input type=submit value='Payer'>\n</form>\n";
+						echo "</br></br>\n";
+						echo "</div><!-- class=\"petitPanier\"-->";					
 					?>
 				</div><!--class="decalage"-->
 			</section>

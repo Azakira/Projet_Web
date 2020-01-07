@@ -28,7 +28,7 @@
 				<li><a href="jours.php">Jour par Jour</a></li>
 				<li><a href="lieu.php">Lieu par Lieu</a></li>	
 				<li><a href="spectacle.php">Spectacles</a></li>
-				<li>Tarifs</li>
+				<li><a href = "panier.php">Panier</a></li>
 			</ul>			
 		</div>
 		

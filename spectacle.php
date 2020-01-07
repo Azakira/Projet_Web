@@ -23,7 +23,6 @@
 				<li><a href="lieu.php">Lieu par Lieu</a></li>
 				<li><a href="spectacle.php">Spectacles</a></li>
 				<li><a href = "panier.php">Panier</a></li>
-				<li>Tarifs</li>
 			</ul>			
 			<div class="riquiqui">
 				<ul class="nav"> <!-- id labelSpectacle qui permet de se rendre à partir du menu directement sur le spectacle recherché sur la page-->
